@@ -45,7 +45,7 @@ texture_filter = 3
 sprite_frames = ExtResource("5_p6bdw")
 animation = &"cat"
 autoplay = "triangle"
-frame_progress = 0.24005544
+frame_progress = 0.20955922
 
 [node name="CircleShape2D" type="CollisionShape2D" parent="." unique_id=1064370028]
 visible = false

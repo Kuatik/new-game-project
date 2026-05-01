@@ -247,8 +247,10 @@ func lose_game():
 	#get_tree().paused = true
 	var label = Label.new()
 	label.text = "GAME OVER\nPress to restart"
-	label.position = Vector2(400, 250)
+	label.position = Vector2(300, 200)
 	label.add_theme_font_size_override("font_size", 40)
+	label.add_theme_color_override("font_color", Color())
+	
 	add_child(label)
 	reset_button.visible = true
 	conveyor.push_force *= 100

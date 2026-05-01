@@ -18,8 +18,8 @@ signal shape_destroyed(shape_id: String)
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
 var last_mouse_pos: Vector2 = Vector2.ZERO
-var last_mouse_time: int = 0   # <- добавили
 
+# Множитель скорости броска (чувствительность мыши)
 @export var throw_sensitivity: float = 1.2
 
 var color_map = {
@@ -34,6 +34,7 @@ var color_map = {
 func _ready():
 	disable_all_collisions()
 	fire_anim.visible = false
+	# Используем круглую коллизию для всех фигур (идеально для физики)
 	circle_collision.disabled = false
 
 	var anim_name = shape_type.to_lower()
@@ -61,26 +62,25 @@ func _on_screen_exited():
 	queue_free()
 
 func _on_draggable_area_input_event(viewport: Node, event: InputEvent, shape_idx: int):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		dragging = true
-		drag_offset = to_local(event.global_position)
-		last_mouse_pos = event.global_position
-		last_mouse_time = Time.get_ticks_msec()   # запоминаем время
-		freeze = true
-		Input.set_default_cursor_shape(Input.CURSOR_MOVE)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# Начало перетаскивания
+			dragging = true
+			drag_offset = to_local(event.global_position)
+			last_mouse_pos = event.global_position
+			freeze = true
+			Input.set_default_cursor_shape(Input.CURSOR_MOVE)
+		# Отпускание обрабатываем глобально в _input
 
 func _input(event: InputEvent):
 	if dragging:
 		if event is InputEventMouseMotion:
+			# Перемещаем фигуру вместе с мышкой
 			global_position = get_global_mouse_position() - drag_offset
 			last_mouse_pos = event.global_position
-			last_mouse_time = Time.get_ticks_msec()   # обновляем время при движении
 		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			# Вычисляем время между последним движением и отпусканием
-			var delta_time = (Time.get_ticks_msec() - last_mouse_time) / 1000.0
-			if delta_time < 0.001:
-				delta_time = 0.001
-			var throw_velocity = (event.global_position - last_mouse_pos) / delta_time
+			# Отпускаем - бросаем
+			var throw_velocity = (event.global_position - last_mouse_pos) / get_process_delta_time()
 			throw_velocity = throw_velocity * throw_sensitivity
 			throw_velocity = throw_velocity.limit_length(1800)
 			dragging = false
@@ -95,8 +95,6 @@ func _enable_fire_anim():
 
 func destroy():
 	emit_signal("shape_destroyed", shape_id)
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-	
 	remove_meta("accepted")
 	queue_free()
 

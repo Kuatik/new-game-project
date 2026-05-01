@@ -4,9 +4,12 @@
 [ext_resource type="Script" uid="uid://blyusjbdydqg5" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cw8ka4u12wa7w" path="res://scenes/conveyor.tscn" id="2_sugp2"]
 [ext_resource type="SpriteFrames" uid="uid://d2mb8s633x26w" path="res://preview_frames.tres" id="2_tefeu"]
+[ext_resource type="Texture2D" uid="uid://ywsf28vsrrav" path="res://assets/bg/Background.png" id="3_85g3d"]
+[ext_resource type="Texture2D" uid="uid://by2x1g1rdup68" path="res://assets/bg/funny picture bg.png" id="3_choun"]
 [ext_resource type="Texture2D" uid="uid://d2br61tnooi07" path="res://assets/GameJam aitu/Chel 2.png" id="3_tipki"]
 [ext_resource type="Texture2D" uid="uid://crof6c8gexttf" path="res://assets/GameJam aitu/Chel 3.png" id="4_85g3d"]
 [ext_resource type="Texture2D" uid="uid://08hdkatjeo0h" path="res://assets/GameJam aitu/Machine.png" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dd3nmgvpu3p55" path="res://assets/bg/funny picture bg 2.png" id="4_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://lsbmsskv340k" path="res://assets/GameJam aitu/Machine part.png" id="5_tefeu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
@@ -27,10 +30,10 @@ animations = [{
 bg_color = Color(0.6, 0.6, 0.6, 0.11764706)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
-bg_color = Color(0.9745684, 0.30052084, 0.6395965, 1)
+bg_color = Color(0.9764706, 0.3019608, 0.6392157, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
-bg_color = Color(0.6, 0.8784314, 0.6, 1)
+bg_color = Color(0.004019165, 0.009404905, 0.004019165, 0.60784316)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 
@@ -38,11 +41,34 @@ bg_color = Color(0.6, 0.8784314, 0.6, 1)
 script = ExtResource("1_sugp2")
 preview_sprite_frames = ExtResource("2_tefeu")
 
+[node name="FunnyPicture" type="TextureRect" parent="." unique_id=1811533066]
+z_index = -4
+offset_left = 817.0
+offset_top = 266.0
+offset_right = 1123.0
+offset_bottom = 454.0
+texture = ExtResource("3_choun")
+
+[node name="FunnyPicture2" type="TextureRect" parent="." unique_id=1533943318]
+z_index = -4
+offset_left = 817.0
+offset_top = 266.0
+offset_right = 1123.0
+offset_bottom = 454.0
+texture = ExtResource("4_ya4ey")
+
+[node name="Background" type="TextureRect" parent="." unique_id=384306894]
+z_index = -5
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("3_85g3d")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1630964440]
 position = Vector2(640, 360)
 
 [node name="Chel" type="AnimatedSprite2D" parent="." unique_id=574163285]
-position = Vector2(607, 503)
+position = Vector2(607, 419)
 sprite_frames = SubResource("SpriteFrames_choun")
 autoplay = "default"
 
@@ -61,11 +87,13 @@ offset_left = 1055.0
 offset_top = 99.0
 offset_right = 1137.0
 offset_bottom = 141.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "❤️ x3"
 metadata/_edit_use_anchors_ = true
 
 [node name="ResetButton" type="Button" parent="UI" unique_id=745138893]
+custom_minimum_size = Vector2(180, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -89,34 +117,37 @@ mouse_filter = 2
 color = Color(0.6117647, 0, 0, 0)
 
 [node name="FloatingMessage" type="Label" parent="UI" unique_id=438505160]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 22.0
-offset_top = -13.0
-offset_right = 154.0
-offset_bottom = 15.0
+offset_left = 36.0
+offset_top = -78.0
+offset_right = 184.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "i hate this job..."
+metadata/_edit_use_anchors_ = true
 
 [node name="IdleProgress" type="ProgressBar" parent="UI" unique_id=1781311718]
 custom_minimum_size = Vector2(64, 0)
-offset_left = 1158.0
-offset_top = 448.0
-offset_right = 1222.0
-offset_bottom = 475.0
+offset_left = 1202.0
+offset_top = 419.00003
+offset_right = 1266.0
+offset_bottom = 446.00003
+rotation = 0.5196488
 mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_85g3d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
 value = 90.0
 
 [node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("1_0wfyh")]
-position = Vector2(1295, 623)
+position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
 main = NodePath("..")
 
@@ -137,7 +168,7 @@ scale = Vector2(8, 36)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="walls" unique_id=924021296]
-position = Vector2(631, 754)
+position = Vector2(631, 638)
 scale = Vector2(72, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D3" unique_id=894359095]
@@ -164,29 +195,29 @@ autostart = true
 
 [node name="machine" type="Sprite2D" parent="." unique_id=1247291713]
 z_index = -1
-position = Vector2(105, 399)
+position = Vector2(105, 315)
 texture = ExtResource("4_tbgi4")
 
 [node name="machine2" type="Sprite2D" parent="." unique_id=125859427]
-position = Vector2(1251, 386)
+position = Vector2(1251, 302)
 texture = ExtResource("4_tbgi4")
 flip_h = true
 
 [node name="Spawner" type="Marker2D" parent="." unique_id=512765533]
-position = Vector2(10, 547)
+position = Vector2(10, 463)
 
 [node name="conveyor" parent="." unique_id=1389983932 instance=ExtResource("2_sugp2")]
-position = Vector2(623, 639.99994)
+position = Vector2(623, 555.99994)
 rotation = -0.032943424
 push_force = 100.0
 
 [node name="machine part" type="Sprite2D" parent="." unique_id=1231105311]
 z_index = 2
-position = Vector2(57, 594)
+position = Vector2(57, 510)
 texture = ExtResource("5_tefeu")
 
 [node name="machine part2" type="Sprite2D" parent="." unique_id=1793329311]
-position = Vector2(1299, 581)
+position = Vector2(1299, 497)
 texture = ExtResource("5_tefeu")
 flip_h = true
 
