@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://155xx7s6y6ta"]
+
+[ext_resource type="PackedScene" uid="uid://cfs0gghgqvpce" path="res://scenes/receiver.tscn" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://blyusjbdydqg5" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cw8ka4u12wa7w" path="res://scenes/conveyor.tscn" id="2_sugp2"]
+[ext_resource type="SpriteFrames" uid="uid://d2mb8s633x26w" path="res://preview_frames.tres" id="2_tefeu"]
+[ext_resource type="Texture2D" uid="uid://d2br61tnooi07" path="res://assets/GameJam aitu/Chel 2.png" id="3_tipki"]
+[ext_resource type="Texture2D" uid="uid://crof6c8gexttf" path="res://assets/GameJam aitu/Chel 3.png" id="4_85g3d"]
+[ext_resource type="Texture2D" uid="uid://08hdkatjeo0h" path="res://assets/GameJam aitu/Machine.png" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://lsbmsskv340k" path="res://assets/GameJam aitu/Machine part.png" id="5_tefeu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tipki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_85g3d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.6, 0.6, 0.6, 0.11764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
+bg_color = Color(0.9745684, 0.30052084, 0.6395965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+bg_color = Color(0.6, 0.8784314, 0.6, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+
+[node name="main" type="Node2D" unique_id=432361688]
+script = ExtResource("1_sugp2")
+preview_sprite_frames = ExtResource("2_tefeu")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1630964440]
+position = Vector2(640, 360)
+
+[node name="Chel" type="AnimatedSprite2D" parent="." unique_id=574163285]
+position = Vector2(607, 503)
+sprite_frames = SubResource("SpriteFrames_choun")
+autoplay = "default"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=323837177]
+
+[node name="SequenceContainer" type="HBoxContainer" parent="UI" unique_id=1745078697]
+offset_left = 161.0
+offset_top = 83.0
+offset_right = 201.0
+offset_bottom = 123.0
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="LifeLabel" type="Label" parent="UI" unique_id=1502931339]
+offset_left = 1055.0
+offset_top = 99.0
+offset_right = 1137.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 30
+text = "❤️ x3"
+metadata/_edit_use_anchors_ = true
+
+[node name="ResetButton" type="Button" parent="UI" unique_id=745138893]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_top = 126.0
+offset_right = 58.0
+offset_bottom = 181.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 1
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
+text = "RESET"
+
+[node name="DamageOverlay" type="ColorRect" parent="UI" unique_id=500471097]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.6117647, 0, 0, 0)
+
+[node name="FloatingMessage" type="Label" parent="UI" unique_id=438505160]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -13.0
+offset_right = 154.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "i hate this job..."
+
+[node name="IdleProgress" type="ProgressBar" parent="UI" unique_id=1781311718]
+custom_minimum_size = Vector2(64, 0)
+offset_left = 1158.0
+offset_top = 448.0
+offset_right = 1222.0
+offset_bottom = 475.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_85g3d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
+value = 90.0
+
+[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("1_0wfyh")]
+position = Vector2(1295, 623)
+scale = Vector2(8.345, 8.345)
+main = NodePath("..")
+
+[node name="walls" type="Node" parent="." unique_id=584706517]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls" unique_id=4139228]
+position = Vector2(-670, 114)
+scale = Vector2(8, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D" unique_id=2937424]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="walls" unique_id=1502502259]
+position = Vector2(1627, 122)
+scale = Vector2(8, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D2" unique_id=1913830791]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="walls" unique_id=924021296]
+position = Vector2(631, 754)
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D3" unique_id=894359095]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="walls" unique_id=168968393]
+position = Vector2(-415.00024, 905.9999)
+rotation = 0.50884074
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D5" unique_id=2081992307]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="walls" unique_id=778207370]
+position = Vector2(631, -126)
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D4" unique_id=377679700]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=162384868]
+wait_time = 3.0
+autostart = true
+
+[node name="machine" type="Sprite2D" parent="." unique_id=1247291713]
+z_index = -1
+position = Vector2(105, 386)
+texture = ExtResource("4_tbgi4")
+
+[node name="machine2" type="Sprite2D" parent="." unique_id=125859427]
+position = Vector2(1251, 386)
+texture = ExtResource("4_tbgi4")
+flip_h = true
+
+[node name="Spawner" type="Marker2D" parent="." unique_id=512765533]
+position = Vector2(10, 547)
+
+[node name="conveyor" parent="." unique_id=1389983932 instance=ExtResource("2_sugp2")]
+position = Vector2(621, 663)
+rotation = -0.032943424
+push_force = 100.0
+
+[node name="machine part" type="Sprite2D" parent="." unique_id=1231105311]
+z_index = 2
+position = Vector2(57, 581)
+texture = ExtResource("5_tefeu")
+
+[node name="machine part2" type="Sprite2D" parent="." unique_id=1793329311]
+position = Vector2(1299, 581)
+texture = ExtResource("5_tefeu")
+flip_h = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]

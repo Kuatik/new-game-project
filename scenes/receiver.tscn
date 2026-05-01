@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cfs0gghgqvpce"]
+
+[ext_resource type="Script" uid="uid://c0cumevv4x2rt" path="res://scripts/receiver.gd" id="1_w3ywi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edaio"]
+
+[node name="Receiver" type="Area2D" unique_id=640673187]
+collision_layer = 8
+script = ExtResource("1_w3ywi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2139723048]
+shape = SubResource("RectangleShape2D_edaio")
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=897909078]
+wait_time = 20.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

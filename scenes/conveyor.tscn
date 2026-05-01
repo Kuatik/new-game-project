@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cw8ka4u12wa7w"]
+
+[ext_resource type="Script" uid="uid://bfjdiv68t26nq" path="res://scripts/conveyor.gd" id="1_kqxj7"]
+[ext_resource type="Texture2D" uid="uid://cstpefwb1isrt" path="res://assets/GameJam aitu/conveyor 2.png" id="2_mfjcm"]
+[ext_resource type="Texture2D" uid="uid://cvlweaajfm3os" path="res://assets/GameJam aitu/conveyor_.png" id="3_osxxb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_54w8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mfjcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_osxxb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj58c"]
+size = Vector2(72.028984, 20)
+
+[node name="conveyor" type="Area2D" unique_id=1389983932]
+scale = Vector2(1.16, 1.16)
+collision_layer = 0
+script = ExtResource("1_kqxj7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=927603160]
+sprite_frames = SubResource("SpriteFrames_54w8r")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.70754963
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=394958432]
+position = Vector2(-1.0000305, 0)
+scale = Vector2(27.600002, 3.4072125)
+shape = SubResource("RectangleShape2D_rj58c")
