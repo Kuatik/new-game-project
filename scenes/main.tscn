@@ -374,6 +374,7 @@ mouse_filter = 2
 color = Color(0.6117647, 0, 0, 0)
 
 [node name="FloatingMessage" type="Label" parent="UI" unique_id=438505160]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -603,6 +604,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
 spawn_timer = NodePath("../../SpawnTimer")
+hold_duration = 1.0
 
 [node name="LightsColor" type="ColorRect" parent="Events/Lights" unique_id=1130533273]
 visible = false
@@ -666,7 +668,7 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-step = 0.01
+step = 0.05
 value = 33.0
 fill_mode = 4
 texture_under = ExtResource("16_jbj1t")
@@ -728,6 +730,7 @@ offset_bottom = 409.0
 text = "FIX"
 
 [node name="FixMachine" parent="Events/ElectricityCrash" unique_id=1273771238 instance=ExtResource("30_tel4y")]
+visible = false
 z_index = 12
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
