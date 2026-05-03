@@ -604,6 +604,23 @@ texture = ExtResource("19_0ld40")
 wait_time = 2.0
 one_shot = true
 
+[node name="PressGuide" type="Label" parent="Press/Lever" unique_id=193128845]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 77.0
+offset_right = 128.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold E"
+metadata/_edit_use_anchors_ = true
+
 [node name="Events" type="Control" parent="." unique_id=172626006]
 layout_mode = 3
 anchors_preset = 15
@@ -680,6 +697,24 @@ grow_horizontal = 0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("24_yq6so")
 
+[node name="LightsGuide" type="Label" parent="Events/Lights/LightLever/A_Lever" unique_id=1042759494]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 67.5
+offset_right = 75.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold LMB"
+metadata/_edit_use_anchors_ = true
+
 [node name="LeverProgress" type="TextureProgressBar" parent="Events/Lights/LightLever" unique_id=1006254751]
 anchors_preset = 8
 anchor_left = 0.5
@@ -741,6 +776,24 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("29_fv21b")
+
+[node name="ElectricityCrashGuide" type="Label" parent="Events/ElectricityCrash/BulbTexture" unique_id=324899487]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -29.5
+offset_right = 177.0
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press Esc"
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="Events/ElectricityCrash" unique_id=72044603]
 visible = false

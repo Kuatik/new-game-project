@@ -392,6 +392,57 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="PressGuide" type="Label" parent="UI" unique_id=1754909670]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 91.0
+offset_top = -223.0
+offset_right = 239.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold E"
+metadata/_edit_use_anchors_ = true
+
+[node name="ElectricityCrashGuide" type="Label" parent="UI" unique_id=705679334]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -421.0
+offset_top = 43.0
+offset_right = -273.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press Esc"
+metadata/_edit_use_anchors_ = true
+
+[node name="LightsGuide" type="Label" parent="UI" unique_id=898035608]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 261.0
+offset_top = -223.0
+offset_right = 409.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold LMB"
+metadata/_edit_use_anchors_ = true
+
 [node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("8_xyero")]
 position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
@@ -579,7 +630,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("17_qw82i")
-max_delay = 60.0
+min_delay = 5.0
+max_delay = 10.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1134938590 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -590,7 +642,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("18_1468l")
-spawn_timer = NodePath("")
+spawn_timer = NodePath("../../SpawnTimer")
 
 [node name="LightsColor" type="ColorRect" parent="Events/Lights" unique_id=577164241]
 visible = false
