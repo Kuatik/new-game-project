@@ -15,8 +15,8 @@ const SHAPE_SCENE = preload("res://scenes/shape.tscn")
 
 func _ready():
 	save_data = Global.load_json(Global.save_data_path)
-	high_score_label.text = "High Score: %s" % str(save_data.high_score)
-	previous_score_label.text = "Previous Score: %s" % str(save_data.scores[-1])
+	high_score_label.text = "High Score: %s" % str(int(save_data.high_score))
+	previous_score_label.text = "Previous Score: %s" % str(int(save_data.scores[-1]))
 	receiver.body_entered.connect(_on_receiver_body_entered)
 	start_button.pressed.connect(_load_game)
 	

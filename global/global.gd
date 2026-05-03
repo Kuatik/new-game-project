@@ -15,6 +15,15 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 	#pass
 
+
+func disable(node: Node):
+	node.visible = false
+	node.process_mode = Node.PROCESS_MODE_DISABLED
+	
+func enable(node: Node):
+	node.visible = true
+	node.process_mode = Node.PROCESS_MODE_INHERIT
+
 func save_json(data: Dictionary, path: String) -> void:
 	if not FileAccess.file_exists(path):
 		push_error("JSON file not found!")

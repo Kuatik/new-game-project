@@ -443,10 +443,9 @@ theme_override_font_sizes/font_size = 20
 text = "Hold LMB"
 metadata/_edit_use_anchors_ = true
 
-[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("8_xyero")]
+[node name="Receiver" parent="." unique_id=640673187 instance=ExtResource("8_xyero")]
 position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
-main = NodePath("")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=2076817885]
 wait_time = 3.0
@@ -774,12 +773,11 @@ z_index = 12
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="BonusLives" type="Control" parent="Events" unique_id=681338432 node_paths=PackedStringArray("main")]
+[node name="BonusLives" type="Control" parent="Events" unique_id=681338432]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("28_akqfu")
-main = NodePath("")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]

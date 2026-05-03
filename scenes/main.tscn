@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cwdo4k5n0cner" path="res://assets/bg/ProgressBar/progress-bar-circle.png" id="16_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://cln5545bnny3w" path="res://assets/bg/ProgressBar/progress-bar-frame.png" id="17_muem4"]
 [ext_resource type="Texture2D" uid="uid://ce4sop35fyth7" path="res://assets/bg/Press lever 2.png" id="19_0ld40"]
+[ext_resource type="AudioStream" uid="uid://dh6mic0860wy3" path="res://assets/sound_effects/industrial_press.wav" id="20_5q0nq"]
 [ext_resource type="Script" uid="uid://c5jff0w1wpwai" path="res://scripts/events.gd" id="20_gqmmt"]
 [ext_resource type="Script" uid="uid://ctjvgrtoru66g" path="res://scripts/events/lights.gd" id="21_yc10j"]
 [ext_resource type="Texture2D" uid="uid://b7el8acjpeh8x" path="res://assets/allat_of_things/Smoke.png" id="22_jscy8"]
@@ -28,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://cpnkhreqirwi6" path="res://assets/allat_of_things/Znak.png" id="24_yq6so"]
 [ext_resource type="Script" uid="uid://fbb43qwwbpvr" path="res://scripts/events/bonus_lives.gd" id="25_og1vs"]
 [ext_resource type="Shader" uid="uid://bkkw0bc24krjm" path="res://scenes/main.gdshader" id="26_2f3dj"]
+[ext_resource type="AudioStream" uid="uid://cvn1ka08p0tm1" path="res://assets/sound_effects/power_outage1.wav" id="26_5q0nq"]
 [ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="26_vxglm"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="29_fv21b"]
 [ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="30_tel4y"]
@@ -45,9 +47,6 @@ animations = [{
 "name": &"default",
 "speed": 2.0
 }]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
-bg_color = Color(0.6, 0.6, 0.6, 0.11764706)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
 bg_color = Color(0.9764706, 0.3019608, 0.6392157, 0)
@@ -375,21 +374,6 @@ text = "+100"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="ResetButton" type="Button" parent="UI" unique_id=745138893]
-custom_minimum_size = Vector2(180, 0)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -57.0
-offset_top = 126.0
-offset_right = 58.0
-offset_bottom = 181.0
-grow_horizontal = 2
-mouse_default_cursor_shape = 6
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
-text = "RESET"
-
 [node name="DamageOverlay" type="ColorRect" parent="UI" unique_id=500471097]
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,6 +413,20 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_85g3d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
 value = 90.0
+
+[node name="ResetButton" type="Button" parent="UI" unique_id=1085320004]
+custom_minimum_size = Vector2(180, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.0
+offset_top = 279.0
+offset_right = 89.0
+offset_bottom = 351.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 6
+theme_override_font_sizes/font_size = 46
+text = "Reset"
 
 [node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("1_0wfyh")]
 position = Vector2(1295, 539)
@@ -623,6 +621,9 @@ theme_override_font_sizes/font_size = 20
 text = "Hold E"
 metadata/_edit_use_anchors_ = true
 
+[node name="Audio" type="AudioStreamPlayer2D" parent="Press" unique_id=2062223555]
+stream = ExtResource("20_5q0nq")
+
 [node name="Events" type="Control" parent="." unique_id=172626006]
 layout_mode = 3
 anchors_preset = 15
@@ -634,7 +635,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-max_delay = 60.0
+min_delay = 3.0
+max_delay = 10.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -736,6 +738,9 @@ texture_over = ExtResource("17_muem4")
 texture_progress = ExtResource("16_jbj1t")
 tint_under = Color(0, 0, 0, 0.45490196)
 tint_progress = Color(0, 0.9989807, 0, 1)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=1363996439]
+stream = ExtResource("26_5q0nq")
 
 [node name="ElectricityCrash" type="Control" parent="Events" unique_id=1878803399]
 layout_mode = 1

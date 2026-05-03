@@ -4,6 +4,7 @@ extends Node2D
 @onready var lever_progress: TextureProgressBar = $Lever/LeverProgress
 @onready var lever_texture: TextureRect = $Lever/LeverTexture
 @onready var lever_texture_Active: TextureRect = $Lever/LeverTexture2
+@onready var audio: AudioStreamPlayer2D = $Audio
 
 @onready var lever_cooldown: Timer = $Lever/LeverCooldown
 
@@ -15,6 +16,8 @@ var value: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lever_progress.hide()
+	lever_cooldown.timeout.connect(_revert_lever)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +38,7 @@ func _process(delta: float) -> void:
 		lever_texture.visible = false
 		lever_texture_Active.visible = true
 		animation_player.play("press")
+		audio.play()
 		value = 0
 		set_value()
 		lever_cooldown.start()
@@ -47,6 +51,10 @@ func set_value():
 	else:
 		lever_progress.hide()
 
+
+func _revert_lever():
+	lever_texture.visible = true
+	lever_texture_Active.visible = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is DraggableShape:
