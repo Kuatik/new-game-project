@@ -275,6 +275,7 @@ shader_parameter/intensity = 0.94400004484
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
 lives = 300
+rand_fire_chance = 10.1
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
