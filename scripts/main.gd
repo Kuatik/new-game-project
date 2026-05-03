@@ -20,9 +20,9 @@ const SHAPE_SCENE = preload("res://scenes/shape.tscn")
 const TICK_SCENE = preload("res://scenes/tick.tscn")
 
 
-var all_combinations: Array[String] = []
-var normal_shapes: Array[String] = []
-var required_sequence: Array[String] = []
+var all_combinations: Array[String] = [] # Все возможные комбинации спавна
+var normal_shapes: Array[String] = [] # Все возможные комбинации порядка фигур
+var required_sequence: Array[String] = [] # Требуемый порядок фигур
 var needed_counts: Dictionary = {}
 var current_index: int = 0
 @export var lives: int = 3
@@ -39,6 +39,9 @@ var game_lost = false
 var colors = ["Red", "Yellow", "Blue", "Green", "Purple", "Cyan"]
 var shapes = ["Circle", "Square", "Triangle", "Cat", "Star", "Luna", "Karakuli", "Heart"]
 
+#@export_enum(1,5,1) 
+#@export var rand_fire_chance: Array[int] = [0,0,0]
+@export_range(0.1,100.0,1.0) var rand_fire_chance: float
 # Цвета для модуляции
 var color_map = {
 	"Red": Color(1,0,0), "Yellow": Color(1,1,0), "Blue": Color(0,0,1),
@@ -49,7 +52,7 @@ var color_map = {
 # Вы можете создать отдельный SpriteFrames ресурс через редактор и указать его здесь
 @export var preview_sprite_frames: SpriteFrames   # перетащите в инспектор готовый ресурс
 
-var complaint_messages = [
+@export var complaint_messages = [
 	"I hate this job!",
 	"Oh no, wrong shape!",
 	"Quality control failed!",
@@ -185,12 +188,16 @@ func _on_timer_timeout():
 	shape_instance.shape_type = shape_type
 	shape_instance.shape_color = color
 	shape_instance.shape_id = combo_to_spawn
-	
+	if shape_instance.shape_type == "Karakuli":
+		shape_instance.call_deferred("_draggable_off")
 	# ✨ Если фигура Cat, включаем анимацию огня (fire_anim)
-	if shape_type == "Cat":
-		# Предполагаем, что в shape.tscn есть узел FireAnim (AnimatedSprite2D)
-		# Сделаем его видимым и запустим анимацию
+	#if shape_type == "Cat":
+		## Предполагаем, что в shape.tscn есть узел FireAnim (AnimatedSprite2D)
+		## Сделаем его видимым и запустим анимацию
+		#shape_instance.call_deferred("_enable_fire_anim")
+	if randf() <= rand_fire_chance/100:
 		shape_instance.call_deferred("_enable_fire_anim")
+	
 	
 	shape_instance.connect("shape_destroyed", _on_shape_destroyed)
 	add_child(shape_instance)
@@ -209,10 +216,16 @@ func choose_combo_to_spawn() -> String:
 	return all_combinations[randi() % all_combinations.size()]
 
 func _on_shape_destroyed(shape_id: String):
-	if current_index < required_sequence.size():
-		var current_required = required_sequence[current_index]
-		if shape_id == current_required:
-			needed_counts[current_required] = needed_counts.get(current_required, 0) + 1
+	for i in range(current_index, required_sequence.size()):
+		if required_sequence[i] == shape_id:
+			needed_counts[shape_id] = needed_counts.get(shape_id, 0) + 1
+			break
+
+#func _on_shape_destroyed(shape_id: String):
+	#if current_index < required_sequence.size():
+		#var current_required = required_sequence[current_index]
+		#if shape_id == current_required:
+			#needed_counts[current_required] = needed_counts.get(current_required, 0) + 1
 
 func _on_receiver_body_entered(body: Node):
 	if body is DraggableShape and not body.has_meta("accepted"):
@@ -229,7 +242,8 @@ func try_accept_shape(shape: DraggableShape):
 	if current_index >= required_sequence.size():
 		shape.destroy()
 		return
-	var is_karakuli = shape.shape_type == "Karakuli"
+	#var is_karakuli = shape.shape_type == "Karakuli"
+	var is_universal = shape.shape_type == "Cat"
 	var required_now = required_sequence[current_index]
 	print("required_now: ", required_now)
 	print("shape_id: ", shape_id)
@@ -237,7 +251,7 @@ func try_accept_shape(shape: DraggableShape):
 	print("shape square collision: ", shape.square_collision.disabled)
 	print("shape star collision: ", shape.star_collision.disabled)
 	print("shape triangle collision: ", shape.triangle_collision.disabled)
-	if is_karakuli or shape_id == required_now:
+	if is_universal or shape_id == required_now:
 		shape.destroy()
 		current_index += 1
 		update_ui_sequence()

@@ -13,16 +13,13 @@ script = ExtResource("1_apcoj")
 
 [node name="LeftContainer" type="VBoxContainer" parent="." unique_id=467263239]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -140.0
+offset_left = 500.0
 offset_top = -20.0
-offset_right = -100.0
+offset_right = 540.0
 offset_bottom = 20.0
-grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RightContainer" type="VBoxContainer" parent="." unique_id=1300623987]
@@ -32,9 +29,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -180.0
+offset_left = -540.0
 offset_top = -20.0
-offset_right = -140.0
+offset_right = -500.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -49,3 +46,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.18359044, 0.18359047, 0.18359038, 0.5411765)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=354323115]
+custom_minimum_size = Vector2(320, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.34407586, 0.3440757, 0.34407574, 1)

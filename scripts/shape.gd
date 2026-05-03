@@ -7,6 +7,7 @@ signal shape_destroyed(shape_id: String)
 @export var shape_id: String = ""
 @export_enum("Circle", "Square", "Triangle", "Cat", "Star", "Luna", "Karakuli", "Heart") var shape_type: String = "Circle"
 @export_enum("Red", "Yellow", "Blue", "Green", "Purple", "Cyan") var shape_color: String = "Red"
+@onready var draggable_area: Area2D = $DraggableArea
 
 @onready var circle_collision: CollisionShape2D = $CircleShape2D
 @onready var square_collision: CollisionShape2D = $SquareShape2D
@@ -88,10 +89,16 @@ func _input(event: InputEvent):
 			apply_central_impulse(throw_velocity)
 			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
+func _draggable_off():
+	draggable_area.input_pickable = false
+	
+
 func _enable_fire_anim():
 	if has_node("FireAnim"):
+		_draggable_off()
 		$FireAnim.visible = true
 		$FireAnim.play("fire")
+		
 
 func destroy():
 	emit_signal("shape_destroyed", shape_id)
