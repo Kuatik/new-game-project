@@ -274,7 +274,7 @@ shader_parameter/intensity = 0.94400004484
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 300
+lives = 1
 rand_fire_chance = 10.1
 preview_sprite_frames = ExtResource("2_tefeu")
 
@@ -768,4 +768,5 @@ main = NodePath("../..")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Press/Lever/LeverCooldown" to="Press" method="_on_lever_cooldown_timeout"]
 [connection signal="mouse_entered" from="Events/Lights/LightLever/A_Lever" to="Events/Lights" method="_on_a_lever_mouse_entered"]

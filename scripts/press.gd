@@ -51,3 +51,8 @@ func set_value():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is DraggableShape:
 		body.destroy()
+
+
+func _on_lever_cooldown_timeout() -> void:
+	lever_texture.visible = true
+	lever_texture_Active.visible = false
