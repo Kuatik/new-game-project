@@ -4,6 +4,8 @@ extends Node2D
 @onready var receiver: Area2D = $Receiver
 @onready var ui_sequence: HBoxContainer = $UI/SequenceContainer
 @onready var life_label: Label = $UI/LifeLabel
+@onready var score_label: Label = $UI/ScoreLabel
+@onready var gain_label: Label = $UI/GainLabel
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var reset_button: Button = $UI/ResetButton
 @onready var conveyor: Area2D = $conveyor
@@ -15,6 +17,8 @@ extends Node2D
 
 
 const SHAPE_SCENE = preload("res://scenes/shape.tscn")
+const TICK_SCENE = preload("res://scenes/tick.tscn")
+
 
 var all_combinations: Array[String] = []
 var normal_shapes: Array[String] = []
@@ -22,6 +26,15 @@ var required_sequence: Array[String] = []
 var needed_counts: Dictionary = {}
 var current_index: int = 0
 @export var lives: int = 3
+
+# Score
+@export var max_score_gain = 100
+@export var score_reductor = 20
+var score = 0
+var current_score_gain = max_score_gain
+
+# Game State
+var game_lost = false
 
 var colors = ["Red", "Yellow", "Blue", "Green", "Purple", "Cyan"]
 var shapes = ["Circle", "Square", "Triangle", "Cat", "Star", "Luna", "Karakuli", "Heart"]
@@ -47,6 +60,7 @@ var complaint_messages = [
 ]
 
 func _ready():
+	score_label.text = str(score)
 	for color in colors:
 		for shape in shapes:
 			all_combinations.append(color + "_" + shape)
@@ -73,6 +87,7 @@ func _ready():
 func _process(delta: float) -> void:
 	if receiver and receiver.idle_timer.time_left > 0:
 		idle_progress.value = (receiver.idle_timer.time_left / receiver.idle_timer.wait_time) * 100
+		gain_label.text = "+ %s" % str(current_score_gain)
 	else:
 		idle_progress.value = 0
 
@@ -93,15 +108,29 @@ func update_ui_sequence():
 	for child in ui_sequence.get_children():
 		child.queue_free()
 	
-	for i in range(current_index, required_sequence.size()):
+	for i in range(0, required_sequence.size()):
 		var combo = required_sequence[i]
 		var parts = combo.split("_")
 		var color_name = parts[0]
 		var shape_name = parts[1]
 		var icon = create_preview_icon(shape_name, color_name)
 		ui_sequence.add_child(icon)
+		if i < current_index:
+			icon.get_node("Tick").visible = true
+
+		
+func mark_ui_sequence():
+	for i in range(0, current_index):
+		var combo = required_sequence[i]
+		var parts = combo.split("_")
+		var color_name = parts[0]
+		var shape_name = parts[1]
+		var icon = create_preview_icon(shape_name, color_name)
+		icon.get_node("Tick").visible = true
 
 func create_preview_icon(shape: String, color: String) -> Control:
+	var tick = TICK_SCENE.instantiate()
+	tick.visible = false
 	# Контейнер для анимации
 	var container = CenterContainer.new()
 	container.custom_minimum_size = Vector2(64, 64)
@@ -129,6 +158,7 @@ func create_preview_icon(shape: String, color: String) -> Control:
 	anim_sprite.play()
 	
 	container.add_child(anim_sprite)
+	container.add_child(tick)
 	return container
 
 func create_temp_sprite_frames() -> SpriteFrames:
@@ -190,6 +220,8 @@ func _on_receiver_body_entered(body: Node):
 		try_accept_shape(body)
 
 func try_accept_shape(shape: DraggableShape):
+	if game_lost:
+		return
 	if not is_instance_valid(shape):
 		return
 	
@@ -212,12 +244,17 @@ func try_accept_shape(shape: DraggableShape):
 		if current_index >= required_sequence.size():
 			win_game()
 	else:
+		reduce_score_gain()
 		take_damage()
 		shape.destroy()
 
 
 func win_game():
 	#get_tree().paused = true
+	score += current_score_gain
+	score_label.text = str(score)
+	current_score_gain = max_score_gain
+	print("Current score: ", score)
 	receiver.idle_timer.start()
 	var label = Label.new()
 	label.text = "Excellent!"
@@ -245,6 +282,10 @@ func win_game():
 
 func lose_game():
 	#get_tree().paused = true
+	game_lost = true
+	save_score(score)
+	score = 0
+	current_score_gain = max_score_gain
 	var label = Label.new()
 	label.text = "GAME OVER\nPress to restart"
 	label.position = Vector2(300, 200)
@@ -255,8 +296,17 @@ func lose_game():
 	reset_button.visible = true
 	conveyor.push_force *= 100
 
+func save_score(score):
+	var new_save_data = Global.save_data
+	print(new_save_data)
+	new_save_data.scores.append(score)
+	print(new_save_data)
+	new_save_data.high_score = new_save_data.scores.max()
+	Global.save_json(new_save_data, Global.save_data_path)
+	Global.save_data = new_save_data
 
 func _reset_game():
+	game_lost = false
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
@@ -289,3 +339,10 @@ func _unhandled_input(event: InputEvent):
 		if get_tree().paused:
 			get_tree().paused = false
 			get_tree().reload_current_scene()
+
+
+func reduce_score_gain():
+	current_score_gain -= score_reductor
+	if current_score_gain < 0:
+		current_score_gain = 0
+	
