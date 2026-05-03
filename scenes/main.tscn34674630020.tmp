@@ -29,8 +29,6 @@
 [ext_resource type="Script" uid="uid://fbb43qwwbpvr" path="res://scripts/events/bonus_lives.gd" id="25_og1vs"]
 [ext_resource type="Shader" uid="uid://bkkw0bc24krjm" path="res://scenes/main.gdshader" id="26_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="26_vxglm"]
-[ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="29_fv21b"]
-[ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="30_tel4y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -262,7 +260,6 @@ shader_parameter/intensity = 0.94400004484
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 300
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
@@ -631,13 +628,11 @@ mouse_filter = 0
 texture = ExtResource("23_og1vs")
 
 [node name="TextureRect" type="TextureRect" parent="Events/Lights/LightLever/A_Lever" unique_id=206816429]
-z_index = 10
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -53.0
-offset_right = 29.0
+offset_left = -82.0
 offset_bottom = 150.0
 grow_horizontal = 0
 scale = Vector2(0.3, 0.3)
@@ -690,33 +685,13 @@ offset_right = 206.0
 offset_bottom = 444.0
 texture = ExtResource("26_vxglm")
 
-[node name="TextureRect" type="TextureRect" parent="Events/ElectricityCrash/BulbTexture" unique_id=1857618899]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -89.0
-offset_top = -151.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("29_fv21b")
-
 [node name="Button" type="Button" parent="Events/ElectricityCrash" unique_id=72044603]
-visible = false
 layout_mode = 0
 offset_left = 208.0
 offset_top = 378.0
 offset_right = 240.0
 offset_bottom = 409.0
 text = "FIX"
-
-[node name="FixMachine" parent="Events/ElectricityCrash" unique_id=1273771238 instance=ExtResource("30_tel4y")]
-z_index = 12
-layout_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="BonusLives" type="Control" parent="Events" unique_id=2024648769 node_paths=PackedStringArray("main")]
 anchors_preset = 0

@@ -1,0 +1,49 @@
+extends Control
+
+signal event_finished
+
+@onready var spawn_timer: Timer = $"../../SpawnTimer"
+@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+@onready var bulb_texture: TextureRect = $BulbTexture
+@onready var fix_machine: Control = $FixMachine
+#@onready var main: Node2D = $"../.."
+#@onready var fix_machine: Control = $FixMachine
+var is_active: bool = false
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	bulb_texture.visible = false
+	gpu_particles_2d.emitting = false
+	fix_machine.hide()
+	#pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	# TEST
+	if not is_active:
+		return
+	if Input.is_action_just_pressed("ui_cancel"):
+		#stop_event()
+		fix_machine.show()
+	#pass
+
+
+
+func start_event():
+	if is_active:
+		return
+	is_active = true
+	gpu_particles_2d.emitting = true
+	bulb_texture.visible = true
+	spawn_timer.paused = true
+	fix_machine.game_completed.connect(stop_event)
+
+func stop_event():
+	if not is_active:
+		return
+	is_active = false
+	gpu_particles_2d.emitting = false
+	spawn_timer.paused = false
+	bulb_texture.visible = false
+	#emit_signal("event_finished")
+	event_finished.emit()
+	

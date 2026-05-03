@@ -21,7 +21,7 @@ var normal_shapes: Array[String] = []
 var required_sequence: Array[String] = []
 var needed_counts: Dictionary = {}
 var current_index: int = 0
-var lives: int = 3
+@export var lives: int = 3
 
 var colors = ["Red", "Yellow", "Blue", "Green", "Purple", "Cyan"]
 var shapes = ["Circle", "Square", "Triangle", "Cat", "Star", "Luna", "Karakuli", "Heart"]

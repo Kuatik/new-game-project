@@ -7,7 +7,7 @@ extends Node2D
 
 @onready var lever_cooldown: Timer = $Lever/LeverCooldown
 
-
+var event_active: bool = false
 
 @export_range(0,5,1) var hold_time: int = 0
 var value: int = 0
@@ -19,7 +19,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not lever_cooldown.is_stopped():
+	if not lever_cooldown.is_stopped() or event_active:
 		#lever_progress.tint_progress = Color(1,0,0)
 		return
 	if Input.is_action_just_pressed("lever_press"):
