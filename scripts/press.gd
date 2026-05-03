@@ -9,7 +9,7 @@ extends Node2D
 
 var event_active: bool = false
 
-@export_range(0,5,1) var hold_time: int = 0
+@export_range(0,15,1) var hold_time: int = 0
 var value: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 		value = 0
 	elif Input.is_action_pressed("lever_press"):
 		value += 1
+		#value += 1 / (100*delta)
 	elif Input.is_action_just_released("lever_press"):
 		value = 0
 	set_value()

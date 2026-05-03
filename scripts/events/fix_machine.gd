@@ -14,12 +14,19 @@ var left_items = []   # массив ссылок на левые ColorRect
 var right_items = []  # массив ссылок на правые ColorRect
 var current_selected_left = null   # выбранный левый элемент (или его цвет)
 var matched_count = 0
-
+var is_active: bool = false
 @onready var left_container = $LeftContainer
 @onready var right_container = $RightContainer
 
+
 func _ready():
 	# Перемешиваем левые цвета
+	pass
+	
+func start_game():
+	if is_active:
+		return
+	is_active = true
 	var shuffled_left = color_list.duplicate()
 	shuffled_left.shuffle()
 	
@@ -85,5 +92,9 @@ func remove_pair(left_rect: ColorRect, right_rect: ColorRect):
 	right_items.erase(right_rect)
 
 func complete_game():
+	if not is_active:
+		return
+	is_active = false
+	matched_count = 0
 	game_completed.emit()
-	queue_free()
+	#queue_free()

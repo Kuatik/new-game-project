@@ -39,9 +39,11 @@ func _start_random_event():
 	
 	var random_index = randi() % event_list.size()
 	current_event = event_list[random_index]
+	print("current_event=", current_event.name)
 	current_event.event_finished.connect(_on_event_finished)
 	current_event.start_event()
-	press.event_active = true
+	if current_event and current_event.name == "Lights":
+		press.event_active = true
 	#pass
 
 func _on_event_finished():

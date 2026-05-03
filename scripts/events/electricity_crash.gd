@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 		return
 	if Input.is_action_just_pressed("ui_cancel"):
 		#stop_event()
+		
 		fix_machine.show()
 	#pass
 
@@ -36,6 +37,7 @@ func start_event():
 	bulb_texture.visible = true
 	spawn_timer.paused = true
 	fix_machine.game_completed.connect(stop_event)
+	fix_machine.start_game()
 
 func stop_event():
 	if not is_active:
@@ -44,6 +46,8 @@ func stop_event():
 	gpu_particles_2d.emitting = false
 	spawn_timer.paused = false
 	bulb_texture.visible = false
+	fix_machine.hide()
 	#emit_signal("event_finished")
+	fix_machine.game_completed.disconnect(stop_event)
 	event_finished.emit()
 	

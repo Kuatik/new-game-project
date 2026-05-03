@@ -146,6 +146,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/path = NodePath("../Events/Lights/LightsColor:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_jkv2x"]
 resource_name = "press"
@@ -470,6 +482,7 @@ flip_h = true
 [node name="Press" type="Node2D" parent="." unique_id=360934557]
 position = Vector2(-338, 0)
 script = ExtResource("13_jkv2x")
+hold_time = 15
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Press" unique_id=876348202]
 z_index = 2
@@ -577,8 +590,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 5.0
-max_delay = 10.0
+min_delay = 1.0
+max_delay = 5.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -653,6 +666,7 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+step = 0.01
 value = 33.0
 fill_mode = 4
 texture_under = ExtResource("16_jbj1t")
