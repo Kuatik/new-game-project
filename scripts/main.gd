@@ -20,9 +20,9 @@ const SHAPE_SCENE = preload("res://scenes/shape.tscn")
 const TICK_SCENE = preload("res://scenes/tick.tscn")
 
 
-var all_combinations: Array[String] = []
-var normal_shapes: Array[String] = []
-var required_sequence: Array[String] = []
+var all_combinations: Array[String] = [] # Все возможные комбинации спавна
+var normal_shapes: Array[String] = [] # Все возможные комбинации порядка фигур
+var required_sequence: Array[String] = [] # Требуемый порядок фигур
 var needed_counts: Dictionary = {}
 var current_index: int = 0
 @export var lives: int = 3
@@ -49,7 +49,7 @@ var color_map = {
 # Вы можете создать отдельный SpriteFrames ресурс через редактор и указать его здесь
 @export var preview_sprite_frames: SpriteFrames   # перетащите в инспектор готовый ресурс
 
-var complaint_messages = [
+@export var complaint_messages = [
 	"I hate this job!",
 	"Oh no, wrong shape!",
 	"Quality control failed!",
@@ -209,10 +209,16 @@ func choose_combo_to_spawn() -> String:
 	return all_combinations[randi() % all_combinations.size()]
 
 func _on_shape_destroyed(shape_id: String):
-	if current_index < required_sequence.size():
-		var current_required = required_sequence[current_index]
-		if shape_id == current_required:
-			needed_counts[current_required] = needed_counts.get(current_required, 0) + 1
+	for i in range(current_index, required_sequence.size()):
+		if required_sequence[i] == shape_id:
+			needed_counts[shape_id] = needed_counts.get(shape_id, 0) + 1
+			break
+
+#func _on_shape_destroyed(shape_id: String):
+	#if current_index < required_sequence.size():
+		#var current_required = required_sequence[current_index]
+		#if shape_id == current_required:
+			#needed_counts[current_required] = needed_counts.get(current_required, 0) + 1
 
 func _on_receiver_body_entered(body: Node):
 	if body is DraggableShape and not body.has_meta("accepted"):
