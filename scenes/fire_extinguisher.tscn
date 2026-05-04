@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bbn2ubwn0okwk"]
+
+[ext_resource type="Texture2D" uid="uid://vji4764ck04n" path="res://assets/allat_of_things/fire_extinguisher_passive.png" id="1_h1dxr"]
+[ext_resource type="Script" uid="uid://106wx1wvthoy" path="res://scenes/fire_extinguisher.gd" id="1_kkplc"]
+[ext_resource type="Texture2D" uid="uid://d1ggt5rkdhfbn" path="res://assets/allat_of_things/Penka.png" id="2_4pe2v"]
+[ext_resource type="Texture2D" uid="uid://biklxhh5yxfdx" path="res://assets/allat_of_things/fire_extinguisher_active.png" id="2_kkplc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pe2v"]
+radius = 30.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_385mk"]
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 27.17
+initial_velocity_min = -150.0
+initial_velocity_max = -100.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 0.7
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_385mk"]
+radius = 15.0
+height = 90.0
+
+[node name="FireExtinguisher" type="Node2D" unique_id=2073946010]
+script = ExtResource("1_kkplc")
+
+[node name="Idle" type="Sprite2D" parent="." unique_id=1515935591]
+texture = ExtResource("1_h1dxr")
+
+[node name="Active" type="Sprite2D" parent="." unique_id=80826516]
+position = Vector2(-23, 0)
+texture = ExtResource("2_kkplc")
+
+[node name="ExtinguishingArea" type="Area2D" parent="Active" unique_id=699869617]
+position = Vector2(-37, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Active/ExtinguishingArea" unique_id=1919543457]
+position = Vector2(-44.000004, 32)
+scale = Vector2(1.8800006, 1.8800006)
+shape = SubResource("CircleShape2D_4pe2v")
+
+[node name="Penka" type="GPUParticles2D" parent="Active" unique_id=872178986]
+z_index = 8
+position = Vector2(-44, 16)
+amount = 4
+texture = ExtResource("2_4pe2v")
+lifetime = 0.99
+process_material = SubResource("ParticleProcessMaterial_385mk")
+
+[node name="DraggableArea" type="Area2D" parent="." unique_id=2119463164]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableArea" unique_id=1163103236]
+position = Vector2(-1, 6)
+shape = SubResource("CapsuleShape2D_385mk")
+
+[connection signal="body_entered" from="Active/ExtinguishingArea" to="." method="_on_extinguishing_area_body_entered"]
+[connection signal="input_event" from="DraggableArea" to="." method="_on_draggable_area_input_event"]
+[connection signal="mouse_entered" from="DraggableArea" to="." method="_on_draggable_area_mouse_entered"]
+[connection signal="mouse_exited" from="DraggableArea" to="." method="_on_draggable_area_mouse_exited"]

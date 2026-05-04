@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://likwfdmbss2e"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_1a85y"]
+[ext_resource type="Script" uid="uid://bwscw0y1ilbav" path="res://scripts/main_menu.gd" id="1_1a85y"]
 [ext_resource type="Texture2D" uid="uid://by2x1g1rdup68" path="res://assets/bg/funny picture bg.png" id="2_hl5e0"]
 [ext_resource type="Texture2D" uid="uid://dd3nmgvpu3p55" path="res://assets/bg/funny picture bg 2.png" id="3_engjn"]
 [ext_resource type="Texture2D" uid="uid://crhmrc2bs717j" path="res://assets/bg/funny picture bg 1.png" id="4_6h3lr"]
 [ext_resource type="Texture2D" uid="uid://ywsf28vsrrav" path="res://assets/bg/Background.png" id="5_dj67d"]
 [ext_resource type="Texture2D" uid="uid://d2br61tnooi07" path="res://assets/GameJam aitu/Chel 2.png" id="6_6vcge"]
 [ext_resource type="Texture2D" uid="uid://crof6c8gexttf" path="res://assets/GameJam aitu/Chel 3.png" id="7_ip0br"]
+[ext_resource type="PackedScene" uid="uid://duballsj0athl" path="res://scenes/guide.tscn" id="8_tcusk"]
 [ext_resource type="PackedScene" uid="uid://cfs0gghgqvpce" path="res://scenes/receiver.tscn" id="8_xyero"]
 [ext_resource type="Texture2D" uid="uid://08hdkatjeo0h" path="res://assets/GameJam aitu/Machine.png" id="9_tcusk"]
 [ext_resource type="PackedScene" uid="uid://cw8ka4u12wa7w" path="res://scenes/conveyor.tscn" id="10_4puye"]
@@ -21,7 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://cln5545bnny3w" path="res://assets/bg/ProgressBar/progress-bar-frame.png" id="18_6h3lr"]
 [ext_resource type="Script" uid="uid://ctjvgrtoru66g" path="res://scripts/events/lights.gd" id="18_1468l"]
 [ext_resource type="Texture2D" uid="uid://w7qsfam6ssuf" path="res://assets/allat_of_things/Light Lever bg.png" id="19_01xyg"]
+[ext_resource type="AudioStream" uid="uid://4rt23v04swbc" path="res://assets/sound_effects/universfield-cinematic-impact-hit-02-454665.mp3" id="19_eku7s"]
 [ext_resource type="Texture2D" uid="uid://dhtyf0qggq42c" path="res://assets/allat_of_things/Light Lever.png" id="20_764ux"]
+[ext_resource type="AudioStream" uid="uid://xo2l1ub1g136" path="res://assets/sound_effects/universfield-impact-cinematic-boom-02-487858.mp3" id="20_c6nra"]
 [ext_resource type="Texture2D" uid="uid://cpnkhreqirwi6" path="res://assets/allat_of_things/Znak.png" id="21_wadof"]
 [ext_resource type="Script" uid="uid://gpe2s2i40q8v" path="res://scripts/events/electricity_crash.gd" id="22_b4jiv"]
 [ext_resource type="Texture2D" uid="uid://b7el8acjpeh8x" path="res://assets/allat_of_things/Smoke.png" id="23_68b7m"]
@@ -30,7 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="25_ybca7"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="26_k5xsf"]
 [ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="27_71lbq"]
-[ext_resource type="Script" uid="uid://fbb43qwwbpvr" path="res://scripts/events/bonus_lives.gd" id="28_akqfu"]
+[ext_resource type="Material" uid="uid://bq6aicopp8pbh" path="res://assets/smoke_tres/new_particle_process_material.tres" id="29_qw82i"]
+[ext_resource type="Texture2D" uid="uid://c1tdcj0e4uf7j" path="res://assets/allat_of_things/Smoke 1.png" id="30_1468l"]
+[ext_resource type="Material" uid="uid://b8j22b3yclcx6" path="res://assets/smoke_tres/2_smaller.tres" id="31_01xyg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mb34c"]
 animations = [{
@@ -46,15 +51,15 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgh51"]
-bg_color = Color(0.9764706, 0.3019608, 0.6392157, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyero"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjv1c"]
-bg_color = Color(0.004019165, 0.009404905, 0.004019165, 0.60784316)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcusk"]
+bg_color = Color(0.003921569, 1, 0.003921569, 0.60784316)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_engjn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h3lr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5xsf"]
 size = Vector2(18, 110)
 
 [sub_resource type="Animation" id="Animation_a8y0u"]
@@ -143,6 +148,30 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audio:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Hit:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_jkv2x"]
 resource_name = "press"
@@ -230,32 +259,56 @@ tracks/6/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/path = NodePath("Audio:stream")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Audio:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Hit:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.03333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dj67d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_71lbq"]
 _data = {
 &"RESET": SubResource("Animation_a8y0u"),
 &"press": SubResource("Animation_jkv2x")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcge"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akqfu"]
 size = Vector2(159.5, 101)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ip0br"]
-lifetime_randomness = 1.0
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-angle_min = -44.99999
-angle_max = 45.00001
-spread = 80.0
-initial_velocity_min = 10.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, -50, 0)
-scale_min = 0.099999994
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyero"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mb34c"]
 shader = ExtResource("24_vanrq")
-shader_parameter/speed = 5.00000021375
-shader_parameter/intensity = 0.94400004484
+shader_parameter/speed = 10.0
+shader_parameter/intensity = 1.0
 
 [node name="MainMenu" type="Node2D" unique_id=1391664119]
 script = ExtResource("1_1a85y")
@@ -319,14 +372,27 @@ custom_minimum_size = Vector2(180, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -91.0
+offset_left = -159.0
 offset_top = 279.0
-offset_right = 89.0
+offset_right = 21.0
 offset_bottom = 351.0
 grow_horizontal = 2
 mouse_default_cursor_shape = 6
 theme_override_font_sizes/font_size = 46
 text = "START"
+
+[node name="GuideButton" type="Button" parent="UI" unique_id=1990072456]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 29.0
+offset_top = 280.0
+offset_right = 78.0
+offset_bottom = 352.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 6
+theme_override_font_sizes/font_size = 46
+text = "?"
 
 [node name="DamageOverlay" type="ColorRect" parent="UI" unique_id=352012113]
 anchors_preset = 15
@@ -354,19 +420,6 @@ theme_override_font_sizes/font_size = 20
 text = "i hate this job..."
 metadata/_edit_use_anchors_ = true
 
-[node name="IdleProgress" type="ProgressBar" parent="UI" unique_id=703447951]
-custom_minimum_size = Vector2(64, 0)
-offset_left = 1202.0
-offset_top = 419.00003
-offset_right = 1266.0
-offset_bottom = 446.00003
-rotation = 0.5196488
-mouse_filter = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/background = SubResource("StyleBoxFlat_sgh51")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hjv1c")
-value = 90.0
-
 [node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1336224199]
 offset_left = 474.0
 offset_top = 351.0
@@ -378,8 +431,7 @@ custom_minimum_size = Vector2(82, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Current High Score: 100"
-horizontal_alignment = 1
+text = "High Score: 100"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -388,61 +440,25 @@ custom_minimum_size = Vector2(82, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Previous High Score: 100"
-horizontal_alignment = 1
+text = "Previous Score: 100"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="PressGuide" type="Label" parent="UI" unique_id=1754909670]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 91.0
-offset_top = -223.0
-offset_right = 239.0
-offset_bottom = -195.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Hold E"
-metadata/_edit_use_anchors_ = true
+[node name="IdleProgress" type="ProgressBar" parent="UI" unique_id=1446998378]
+custom_minimum_size = Vector2(64, 0)
+offset_left = 1202.0
+offset_top = 419.00003
+offset_right = 1266.0
+offset_bottom = 446.00003
+rotation = 0.5196488
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_xyero")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tcusk")
+value = 90.0
 
-[node name="ElectricityCrashGuide" type="Label" parent="UI" unique_id=705679334]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -421.0
-offset_top = 43.0
-offset_right = -273.0
-offset_bottom = 71.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Press Esc"
-metadata/_edit_use_anchors_ = true
-
-[node name="LightsGuide" type="Label" parent="UI" unique_id=898035608]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 261.0
-offset_top = -223.0
-offset_right = 409.0
-offset_bottom = -195.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Hold LMB"
-metadata/_edit_use_anchors_ = true
+[node name="Guide" parent="UI" unique_id=1403076890 instance=ExtResource("8_tcusk")]
+visible = false
 
 [node name="Receiver" parent="." unique_id=640673187 instance=ExtResource("8_xyero")]
 position = Vector2(1295, 539)
@@ -519,40 +535,40 @@ position = Vector2(1299, 497)
 texture = ExtResource("11_q13xq")
 flip_h = true
 
-[node name="Press" type="Node2D" parent="." unique_id=1566984738]
+[node name="Press" type="Node2D" parent="." unique_id=804468447]
 position = Vector2(-338, 0)
 script = ExtResource("12_u43bj")
 hold_time = 15
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Press" unique_id=140555035]
+[node name="StaticBody2D" type="StaticBody2D" parent="Press" unique_id=1955031467]
 z_index = 2
 position = Vector2(884, 523)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Press/StaticBody2D" unique_id=222375368]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Press/StaticBody2D" unique_id=964537134]
 position = Vector2(-51, 32)
-shape = SubResource("RectangleShape2D_6h3lr")
+shape = SubResource("RectangleShape2D_k5xsf")
 
-[node name="Sprite2D" type="Sprite2D" parent="Press" unique_id=943041782]
+[node name="Sprite2D" type="Sprite2D" parent="Press" unique_id=1905058669]
 z_index = 1
 position = Vector2(919, -51)
 texture = ExtResource("13_jvjdd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Press" unique_id=1617699497]
-libraries/ = SubResource("AnimationLibrary_dj67d")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Press" unique_id=252896224]
+libraries/ = SubResource("AnimationLibrary_71lbq")
 autoplay = &"press"
 
-[node name="Area2D" type="Area2D" parent="Press" unique_id=441151686]
+[node name="Area2D" type="Area2D" parent="Press" unique_id=652462241]
 position = Vector2(934, 558)
 input_pickable = false
 
-[node name="DestroyArea" type="CollisionShape2D" parent="Press/Area2D" unique_id=1392524374]
+[node name="DestroyArea" type="CollisionShape2D" parent="Press/Area2D" unique_id=260748947]
 position = Vector2(-10.75, 2.5)
-shape = SubResource("RectangleShape2D_6vcge")
+shape = SubResource("RectangleShape2D_akqfu")
 
-[node name="Lever" type="Node2D" parent="Press" unique_id=998684788]
+[node name="Lever" type="Node2D" parent="Press" unique_id=1173806480]
 position = Vector2(1089, 60)
 
-[node name="LeverBG" type="TextureRect" parent="Press/Lever" unique_id=831758266]
+[node name="LeverBG" type="TextureRect" parent="Press/Lever" unique_id=1024014181]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -566,7 +582,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_yxnar")
 
-[node name="LeverProgress" type="TextureProgressBar" parent="Press/Lever" unique_id=745294783]
+[node name="LeverProgress" type="TextureProgressBar" parent="Press/Lever" unique_id=399157314]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -586,7 +602,7 @@ texture_progress = ExtResource("17_engjn")
 tint_under = Color(0, 0, 0, 0.45490196)
 tint_progress = Color(0, 0.9989807, 0, 1)
 
-[node name="LeverTexture" type="TextureRect" parent="Press/Lever" unique_id=625430055]
+[node name="LeverTexture" type="TextureRect" parent="Press/Lever" unique_id=1849059195]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -600,26 +616,48 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_eku7s")
 
-[node name="LeverTexture2" type="TextureRect" parent="Press/Lever" unique_id=523591279]
+[node name="LeverTexture2" type="TextureRect" parent="Press/Lever" unique_id=1189969244]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -38.0
-offset_top = -49.5
-offset_right = 44.0
-offset_bottom = 99.5
+offset_left = -40.0
+offset_right = 42.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_c6nra")
 
-[node name="LeverCooldown" type="Timer" parent="Press/Lever" unique_id=1033681159]
+[node name="LeverCooldown" type="Timer" parent="Press/Lever" unique_id=503981225]
 wait_time = 2.0
 one_shot = true
 
-[node name="Events" type="Control" parent="." unique_id=1679802377]
+[node name="PressGuide" type="Label" parent="Press/Lever" unique_id=1362093121]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 77.0
+offset_right = 128.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold E"
+metadata/_edit_use_anchors_ = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Press" unique_id=1073547223]
+stream = ExtResource("19_eku7s")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Press" unique_id=1702062658]
+stream = ExtResource("20_c6nra")
+
+[node name="Events" type="Control" parent="." unique_id=232271360]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -630,8 +668,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("17_qw82i")
+min_delay = 1.0
+max_delay = 5.0
 
-[node name="Lights" type="Control" parent="Events" unique_id=1134938590 node_paths=PackedStringArray("spawn_timer")]
+[node name="Lights" type="Control" parent="Events" unique_id=1681987867 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -640,9 +680,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("18_1468l")
+Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
+hold_duration = 1.0
 
-[node name="LightsColor" type="ColorRect" parent="Events/Lights" unique_id=577164241]
+[node name="LightsColor" type="ColorRect" parent="Events/Lights" unique_id=1983509034]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -654,7 +696,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.13725491, 0.13725491, 0.13725491, 0.627451)
 
-[node name="LightsColor2" type="ColorRect" parent="Events/Lights" unique_id=1398366807]
+[node name="LightsColor2" type="ColorRect" parent="Events/Lights" unique_id=2049935796]
 visible = false
 z_index = -4
 layout_mode = 1
@@ -666,23 +708,22 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.13725491, 0.13725491, 0.13725491, 1)
 
-[node name="LightLever" type="Node2D" parent="Events/Lights" unique_id=1084709309]
+[node name="LightLever" type="Node2D" parent="Events/Lights" unique_id=65606927]
 position = Vector2(897, 0)
 
-[node name="NA_Lever" type="TextureRect" parent="Events/Lights/LightLever" unique_id=990573138]
+[node name="NA_Lever" type="TextureRect" parent="Events/Lights/LightLever" unique_id=535306295]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("19_01xyg")
 
-[node name="A_Lever" type="TextureRect" parent="Events/Lights/LightLever" unique_id=1233784609]
-visible = false
+[node name="A_Lever" type="TextureRect" parent="Events/Lights/LightLever" unique_id=1268622630]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0
 texture = ExtResource("20_764ux")
 
-[node name="TextureRect" type="TextureRect" parent="Events/Lights/LightLever/A_Lever" unique_id=824828560]
+[node name="TextureRect" type="TextureRect" parent="Events/Lights/LightLever/A_Lever" unique_id=1693589772]
 z_index = 10
 layout_mode = 1
 anchors_preset = 1
@@ -695,7 +736,25 @@ grow_horizontal = 0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("21_wadof")
 
-[node name="LeverProgress" type="TextureProgressBar" parent="Events/Lights/LightLever" unique_id=1065687613]
+[node name="LightsGuide" type="Label" parent="Events/Lights/LightLever/A_Lever" unique_id=555698831]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 67.5
+offset_right = 75.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hold LMB"
+metadata/_edit_use_anchors_ = true
+
+[node name="LeverProgress" type="TextureProgressBar" parent="Events/Lights/LightLever" unique_id=566104644]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -705,7 +764,7 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-step = 0.01
+step = 0.05
 value = 33.0
 fill_mode = 4
 texture_under = ExtResource("17_engjn")
@@ -714,10 +773,10 @@ texture_progress = ExtResource("17_engjn")
 tint_under = Color(0, 0, 0, 0.45490196)
 tint_progress = Color(0, 0.9989807, 0, 1)
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=127453286]
+[node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=2003102862]
 stream = ExtResource("24_6h3lr")
 
-[node name="ElectricityCrash" type="Control" parent="Events" unique_id=1969804793]
+[node name="ElectricityCrash" type="Control" parent="Events" unique_id=1457074168]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -726,19 +785,29 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("22_b4jiv")
+Enabled = false
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=2023259978]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=1665979290]
 z_index = -2
 position = Vector2(164, 376)
 amount = 18
 texture = ExtResource("23_68b7m")
 lifetime = 10.0
 randomness = 0.5
-process_material = SubResource("ParticleProcessMaterial_ip0br")
+process_material = ExtResource("29_qw82i")
 
-[node name="BulbTexture" type="TextureRect" parent="Events/ElectricityCrash" unique_id=1538118061]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=1549567548]
+z_index = -2
+position = Vector2(164, 376)
+amount = 18
+texture = ExtResource("30_1468l")
+lifetime = 10.0
+randomness = 0.5
+process_material = ExtResource("31_01xyg")
+
+[node name="BulbTexture" type="TextureRect" parent="Events/ElectricityCrash" unique_id=1698542006]
 self_modulate = Color(1, 0, 0, 1)
-material = SubResource("ShaderMaterial_xyero")
+material = SubResource("ShaderMaterial_mb34c")
 layout_mode = 0
 offset_left = 174.0
 offset_top = 421.0
@@ -746,7 +815,7 @@ offset_right = 206.0
 offset_bottom = 444.0
 texture = ExtResource("25_ybca7")
 
-[node name="TextureRect" type="TextureRect" parent="Events/ElectricityCrash/BulbTexture" unique_id=250545704]
+[node name="TextureRect" type="TextureRect" parent="Events/ElectricityCrash/BulbTexture" unique_id=924072111]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -760,7 +829,25 @@ grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("26_k5xsf")
 
-[node name="Button" type="Button" parent="Events/ElectricityCrash" unique_id=767757822]
+[node name="ElectricityCrashGuide" type="Label" parent="Events/ElectricityCrash/BulbTexture" unique_id=251597981]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -29.5
+offset_right = 177.0
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press Esc"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Events/ElectricityCrash" unique_id=1255245057]
 visible = false
 layout_mode = 0
 offset_left = 208.0
@@ -775,12 +862,7 @@ z_index = 12
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="BonusLives" type="Control" parent="Events" unique_id=681338432]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("28_akqfu")
-
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Press/Lever/LeverCooldown" to="Press" method="_on_lever_cooldown_timeout"]
 [connection signal="mouse_entered" from="Events/Lights/LightLever/A_Lever" to="Events/Lights" method="_on_a_lever_mouse_entered"]

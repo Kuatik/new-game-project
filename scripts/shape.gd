@@ -16,6 +16,7 @@ signal shape_destroyed(shape_id: String)
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_anim: AnimatedSprite2D = $FireAnim
 
+var burning = false
 
 
 
@@ -101,7 +102,14 @@ func _enable_fire_anim():
 		_draggable_off()
 		$FireAnim.visible = true
 		$FireAnim.play("fire")
+		burning = true
 		
+func _disable_fire_anim():
+	if has_node("FireAnim"):
+		_draggable_off()
+		$FireAnim.visible = false
+		$FireAnim.stop("fire")
+		burning = false
 
 func destroy():
 	emit_signal("shape_destroyed", shape_id)

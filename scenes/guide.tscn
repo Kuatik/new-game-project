@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://duballsj0athl"]
+
+[ext_resource type="Script" uid="uid://b1nsa47lip2dd" path="res://scripts/tutorial.gd" id="1_fd7ko"]
+[ext_resource type="Texture2D" uid="uid://cefby30mbjw1w" path="res://assets/tutorials/tutor_order.png" id="2_nhlb8"]
+[ext_resource type="Texture2D" uid="uid://bsbap2m2p704d" path="res://assets/tutorials/tutor_press.png" id="3_law3w"]
+[ext_resource type="Texture2D" uid="uid://dv3x48fyqxful" path="res://assets/tutorials/next_page.png" id="4_fd7ko"]
+[ext_resource type="Texture2D" uid="uid://h5msosn0lb20" path="res://assets/tutorials/tutor_items.png" id="4_nhlb8"]
+[ext_resource type="Script" uid="uid://c2k2io7msg2c2" path="res://scripts/arrow_button.gd" id="5_l7vi7"]
+[ext_resource type="Texture2D" uid="uid://jyykqgpevfyh" path="res://assets/tutorials/close_button.png" id="7_law3w"]
+[ext_resource type="Script" uid="uid://bv52x7gc0j3gt" path="res://scenes/close_button.gd" id="8_6dbe5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r53ya"]
+bg_color = Color(0.09019608, 0.09019608, 0.09019608, 0.40392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q78cb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7ko"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_law3w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhlb8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dbe5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7vi7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r53ya"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q78cb"]
+
+[node name="Guide" type="Control" unique_id=1403076890]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(37, -76)
+script = ExtResource("1_fd7ko")
+
+[node name="Panel" type="Panel" parent="." unique_id=76393504]
+layout_mode = 0
+offset_left = -633.0
+offset_top = -348.0
+offset_right = 668.0
+offset_bottom = 389.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r53ya")
+
+[node name="TutorialPages" type="Control" parent="." unique_id=1535321643]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Order" type="TextureRect" parent="TutorialPages" unique_id=478740217]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.5
+offset_top = -223.5
+offset_right = 413.5
+offset_bottom = 223.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nhlb8")
+
+[node name="Press" type="TextureRect" parent="TutorialPages" unique_id=1921823782]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.5
+offset_top = -223.5
+offset_right = 413.5
+offset_bottom = 223.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_law3w")
+
+[node name="Time" type="TextureRect" parent="TutorialPages" unique_id=2127990721]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.5
+offset_top = -223.5
+offset_right = 413.5
+offset_bottom = 223.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nhlb8")
+
+[node name="Items" type="TextureRect" parent="TutorialPages" unique_id=297121607]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = -223.0
+offset_right = 498.0
+offset_bottom = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_nhlb8")
+
+[node name="FwdArrow" type="Button" parent="." unique_id=622601116]
+z_index = 99
+layout_mode = 0
+offset_left = 362.0
+offset_top = 122.0
+offset_right = 534.0
+offset_bottom = 233.0
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_q78cb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fd7ko")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_law3w")
+icon = ExtResource("4_fd7ko")
+script = ExtResource("5_l7vi7")
+dir = 0
+
+[node name="BwdArrow" type="Button" parent="." unique_id=1127368064]
+z_index = 99
+layout_mode = 0
+offset_left = -253.0
+offset_top = 286.0
+offset_right = -81.0
+offset_bottom = 397.0
+scale = Vector2(-1, -1)
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_q78cb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nhlb8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6dbe5")
+icon = ExtResource("4_fd7ko")
+script = ExtResource("5_l7vi7")
+dir = 1
+
+[node name="CloseButton" type="Button" parent="." unique_id=346149633]
+layout_mode = 0
+offset_left = 242.0
+offset_top = -242.0
+offset_right = 365.0
+offset_bottom = -149.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l7vi7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r53ya")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q78cb")
+icon = ExtResource("7_law3w")
+script = ExtResource("8_6dbe5")
