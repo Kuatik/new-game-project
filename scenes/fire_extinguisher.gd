@@ -60,7 +60,9 @@ func _input(event: InputEvent):
 func _on_extinguishing_area_body_entered(body):
 	if "burning" in body:
 		penka.emitting = true
-		body.call_deferred("_enable_disable_anim")
+		await get_tree().create_timer(time).timeout
+		if body.has_method("_disable_fire_anim"):
+			body.call_deferred("_disable_fire_anim")
 	else:
 		return
 		

@@ -96,7 +96,9 @@ func _input(event: InputEvent):
 func _draggable_off():
 	draggable_area.input_pickable = false
 	
-
+func _draggable_on():
+	draggable_area.input_pickable = true
+	
 func _enable_fire_anim():
 	if has_node("FireAnim"):
 		_draggable_off()
@@ -106,9 +108,9 @@ func _enable_fire_anim():
 		
 func _disable_fire_anim():
 	if has_node("FireAnim"):
-		_draggable_off()
+		_draggable_on()
 		$FireAnim.visible = false
-		$FireAnim.stop("fire")
+		#$FireAnim.stop("fire")
 		burning = false
 
 func destroy():

@@ -47,10 +47,12 @@
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
 [ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
+[ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="AudioStream" uid="uid://cq4pbkooi4vps" path="res://assets/sound_effects/fart.mp3" id="47_bu4jf"]
 [ext_resource type="Script" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
+[ext_resource type="AudioStream" uid="uid://cnn88ye6gdnek" path="res://assets/sound_effects/stu9-monkey-352770.mp3" id="50_bu4jf"]
 [ext_resource type="AudioStream" uid="uid://cbo7lbd1v8cfd" path="res://assets/sound_effects/bg_music.mp3" id="51_bjg73"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
@@ -691,10 +693,20 @@ text = "Previous Score: 100"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("1_0wfyh")]
+[node name="Explosions" type="Control" parent="UI" unique_id=365522318]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main", "light_bulb") instance=ExtResource("1_0wfyh")]
 position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
 main = NodePath("..")
+light_bulb = NodePath("../green_bulb")
 
 [node name="walls" type="Node" parent="." unique_id=584706517]
 
@@ -906,7 +918,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 1.0
+min_delay = 3.0
 max_delay = 5.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
@@ -1026,7 +1038,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
-Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -1282,6 +1293,9 @@ anchor_bottom = 0.20634781
 grow_horizontal = 2
 texture = ExtResource("50_bjg73")
 metadata/_edit_use_anchors_ = true
+
+[node name="monkey" type="AudioStreamPlayer2D" parent="Events/Monkey" unique_id=407878846]
+stream = ExtResource("50_bu4jf")
 
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false

@@ -24,6 +24,9 @@ const MONKEY_FACE_3 = preload("uid://dvhjxlnvc2l2i")
 const MONKEY_FACE_4 = preload("uid://cmcmwbepnw2gi")
 const MONKEY_FACE = preload("uid://c7817i72tvef")
 
+@onready var monkey_audio: AudioStreamPlayer2D = $monkey
+
+var is_active: bool = false
 
 func _ready():
 	if not Enabled:
@@ -35,6 +38,9 @@ func _ready():
 	press_node.body_destroyed.connect(wow_face)
 
 func wow_face():
+	if not is_active:
+		return
+	monkey_audio.play()
 	monkey_face.texture = MONKEY_FACE_3
 	await get_tree().create_timer(2).timeout
 	monkey_face.texture = MONKEY_FACE_4
@@ -45,7 +51,10 @@ func start_event():
 		stop_event()
 		return
 	# Показываем обезьянку (если она скрыта)
+	is_active = true
+	monkey_texture.visible = true
 	monkey_anim.play("monkey")
+	monkey_audio.play()
 	click_count = 0
 	required_clicks = randi_range(5, 10)
 	# Запускаем первый таймер
@@ -54,10 +63,14 @@ func start_event():
 func stop_event():
 	if not Enabled:
 		event_finished.emit()
+		is_active = false
 		return
 	monkey_anim.play("RESET")
 	if activation_timer:
 		activation_timer.stop()
+	is_active = false
+	monkey_texture.visible = false
+	
 	event_finished.emit()
 
 func schedule_next_activation():
@@ -66,6 +79,8 @@ func schedule_next_activation():
 	activation_timer.start(delay)
 
 func _activate_press_randomly():
+	if not is_active:
+		return
 	if press_node and is_instance_valid(press_node) and press_node.has_method("activate_press"):
 		press_node.activate_press()
 		print("press_node.activate_press()")
