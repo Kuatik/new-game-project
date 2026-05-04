@@ -50,6 +50,7 @@
 [ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
+[ext_resource type="AudioStream" uid="uid://cbo7lbd1v8cfd" path="res://assets/sound_effects/bg_music.mp3" id="51_bjg73"]
 [ext_resource type="AudioStream" uid="uid://cnn88ye6gdnek" path="res://assets/sound_effects/stu9-monkey-352770.mp3" id="50_bu4jf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
@@ -496,8 +497,8 @@ _data = {
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 100
-rand_fire_chance = 100.0
+lives = 1
+rand_fire_chance = 10.1
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
@@ -665,6 +666,54 @@ grow_horizontal = 2
 mouse_default_cursor_shape = 6
 theme_override_font_sizes/font_size = 46
 text = "Reset"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=177562907]
+offset_left = 474.0
+offset_top = 351.0
+offset_right = 828.0
+offset_bottom = 439.0
+
+[node name="HighScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=836227120]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "High Score: 100"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PreviousScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=1448244947]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Previous Score: 100"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=177562907]
+offset_left = 474.0
+offset_top = 351.0
+offset_right = 828.0
+offset_bottom = 439.0
+
+[node name="HighScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=836227120]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "High Score: 100"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PreviousScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=1448244947]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Previous Score: 100"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main", "light_bulb") instance=ExtResource("1_0wfyh")]
 position = Vector2(1295, 539)
@@ -1273,6 +1322,12 @@ flip_h = true
 
 [node name="FireExtinguisher" parent="." unique_id=2073946010 instance=ExtResource("44_cjqg0")]
 position = Vector2(1186, 54)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=506311209]
+stream = ExtResource("51_bjg73")
+volume_db = -24.06
+autoplay = true
+parameters/looping = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]
