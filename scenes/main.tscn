@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -452,8 +453,8 @@ _data = {
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 1
-rand_fire_chance = 10.1
+lives = 300
+rand_fire_chance = 100.0
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
@@ -607,7 +608,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
 value = 90.0
 
 [node name="ResetButton" type="Button" parent="UI" unique_id=1085320004]
-visible = false
 custom_minimum_size = Vector2(180, 0)
 anchors_preset = 5
 anchor_left = 0.5
@@ -1042,7 +1042,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
-Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1169,6 +1168,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_vxglm")
 flip_h = true
+
+[node name="FireExtinguisher" parent="." unique_id=2073946010 instance=ExtResource("44_cjqg0")]
+position = Vector2(1186, 54)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]

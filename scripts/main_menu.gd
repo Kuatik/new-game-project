@@ -6,6 +6,8 @@ extends Node2D
 @onready var spawner = $Spawner
 @onready var receiver = $Receiver
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var guide_button = $UI/GuideButton
+@onready var guide = $UI/Guide
 
 var save_data = null
 var colors = ["Red", "Yellow", "Blue", "Green", "Purple", "Cyan"]
@@ -19,6 +21,7 @@ func _ready():
 	previous_score_label.text = "Previous Score: %s" % str(int(save_data.scores[-1]))
 	receiver.body_entered.connect(_on_receiver_body_entered)
 	start_button.pressed.connect(_load_game)
+	guide_button.pressed.connect(show_guide)
 	
 
 func _load_game():
@@ -41,3 +44,7 @@ func _on_receiver_body_entered(body: Node):
 	if body is DraggableShape and not body.has_meta("accepted"):
 		body.set_meta("accepted", true)
 		body.destroy()
+
+func show_guide():
+	Global.enable(guide)
+	
