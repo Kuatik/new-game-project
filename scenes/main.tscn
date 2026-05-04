@@ -456,7 +456,7 @@ _data = {
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 1
+lives = 100
 rand_fire_chance = 10.1
 preview_sprite_frames = ExtResource("2_tefeu")
 
@@ -962,7 +962,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
-Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -1059,7 +1058,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
-Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1125,6 +1123,7 @@ layout_mode = 2
 text = "RIGHT NOW!"
 
 [node name="Shitter" type="Control" parent="Events/BossBlack" unique_id=720282734]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 15

@@ -17,7 +17,7 @@ var delay_timer: Timer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for child in get_children():
-		if child.has_signal("event_finished") and child.has_method("start_event"):
+		if child.has_signal("event_finished") and child.has_method("start_event") and child.Enabled == true:
 			event_list.append(child)
 			
 	delay_timer = Timer.new()

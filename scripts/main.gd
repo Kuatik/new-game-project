@@ -386,7 +386,7 @@ func _reset_game():
 func flash_damage():
 	damage_overlay.color = Color(1.0, 0.0, 0.0, 0.7)
 	var tween = create_tween()
-	tween.tween_property(damage_overlay, "color:a", 3.0, 30.0)
+	tween.tween_property(damage_overlay, "color:a", 0.0, 0.3)
 
 func show_complaint():
 	var msg = complaint_messages[randi() % complaint_messages.size()]

@@ -127,7 +127,7 @@ func flash_damage():
 	#damage_overlay.modulate.a = 0.7
 	damage_overlay.color = Color(0.0, 1.0, 0.0, 0.702)
 	var tween = create_tween()
-	tween.tween_property(damage_overlay, "color:a", 0.0, 0.3)
+	tween.tween_property(damage_overlay, "color:a", 0.0, 1.3)
 
 func _play_sound():
 	print("YOU ARE TOUCHIN THE SHIT")
