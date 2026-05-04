@@ -8,6 +8,7 @@ signal event_finished
 @onready var conveyor: Area2D = %conveyor
 @onready var lever_progress: TextureProgressBar = $LightLever/LeverProgress
 @onready var audio: AudioStreamPlayer2D = $Audio
+@onready var turn_on_sound: AudioStreamPlayer2D = $TurnOnSound
 
 #endregion
 
@@ -51,6 +52,7 @@ func _process(delta: float) -> void:
 		current_hold += delta
 		lever_progress.value = current_hold
 		if current_hold >= hold_duration:
+			turn_on_sound.playing = true
 			stop_event()
 			holding = false
 	else:

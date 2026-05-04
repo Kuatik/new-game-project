@@ -4,6 +4,9 @@ signal event_finished
 
 @export var Enabled: bool = true
 
+@onready var beeping: AudioStreamPlayer2D = $beeping
+
+
 @onready var spawn_timer: Timer = $"../../SpawnTimer"
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 @onready var gpu_particles_2d2: GPUParticles2D = $GPUParticles2D2
@@ -45,6 +48,7 @@ func start_event():
 	gpu_particles_2d2.emitting = true
 	bulb_texture.visible = true
 	spawn_timer.paused = true
+	beeping.playing = true
 	fix_machine.game_completed.connect(stop_event)
 	fix_machine.start_game()
 
@@ -59,5 +63,7 @@ func stop_event():
 	fix_machine.hide()
 	#emit_signal("event_finished")
 	fix_machine.game_completed.disconnect(stop_event)
+	beeping.playing = false
+	
 	event_finished.emit()
 	print("event_finished.emit()")

@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://3asmsxi5pj7u" path="res://assets/bg/Press.png" id="13_trceg"]
 [ext_resource type="Texture2D" uid="uid://da84vvo5kklqd" path="res://assets/bg/Press lever.png" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bt424vykejhs" path="res://assets/bg/Press lever block.png" id="15_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://iv340uai6put" path="res://assets/sound_effects/universfield-glass-hit-192119.mp3" id="15_vchkt"]
 [ext_resource type="Texture2D" uid="uid://cwdo4k5n0cner" path="res://assets/bg/ProgressBar/progress-bar-circle.png" id="16_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://cln5545bnny3w" path="res://assets/bg/ProgressBar/progress-bar-frame.png" id="17_muem4"]
 [ext_resource type="Texture2D" uid="uid://ce4sop35fyth7" path="res://assets/bg/Press lever 2.png" id="19_0ld40"]
@@ -35,14 +36,20 @@
 [ext_resource type="Texture2D" uid="uid://c1tdcj0e4uf7j" path="res://assets/allat_of_things/Smoke 1.png" id="29_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="29_fv21b"]
 [ext_resource type="Material" uid="uid://bq6aicopp8pbh" path="res://assets/smoke_tres/new_particle_process_material.tres" id="29_j8jky"]
+[ext_resource type="AudioStream" uid="uid://br0yl42q1rpqr" path="res://assets/sound_effects/freesound_community-fuse-box-klick-106954.mp3" id="29_vc5cj"]
 [ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="30_tel4y"]
 [ext_resource type="Material" uid="uid://b8j22b3yclcx6" path="res://assets/smoke_tres/2_smaller.tres" id="31_kmb1v"]
 [ext_resource type="Script" uid="uid://pvpeqou41vgj" path="res://scenes/events/boss_black.gd" id="37_fuf3a"]
 [ext_resource type="Texture2D" uid="uid://815caiyulxc1" path="res://assets/allat_of_things/Boss Black.png" id="38_5poiv"]
+[ext_resource type="AudioStream" uid="uid://cluhpik6nsst" path="res://assets/sound_effects/bip.mp3" id="38_txyw0"]
 [ext_resource type="Texture2D" uid="uid://bx2eiycspnivf" path="res://assets/allat_of_things/Boss Black 2.png" id="39_2cjbq"]
 [ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
+[ext_resource type="AudioStream" uid="uid://bhvyq63rt8hc3" path="res://assets/sound_effects/mop.mp3" id="44_cjqg0"]
+[ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
+[ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
 [ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
@@ -451,10 +458,46 @@ _data = {
 &"boss": SubResource("Animation_txyw0")
 }
 
+[sub_resource type="Animation" id="Animation_j2jfr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonkeyTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(743, -127)]
+}
+
+[sub_resource type="Animation" id="Animation_bjg73"]
+resource_name = "monkey"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonkeyTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.29730183, 1),
+"update": 0,
+"values": [Vector2(743, -127), Vector2(743, 13)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0loja"]
+_data = {
+&"RESET": SubResource("Animation_j2jfr"),
+&"monkey": SubResource("Animation_bjg73")
+}
+
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
-lives = 300
-rand_fire_chance = 100.0
+lives = 100
+rand_fire_chance = 10.1
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
@@ -499,6 +542,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 texture = ExtResource("3_85g3d")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="background" unique_id=2049725752]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1630964440]
 z_index = 10
@@ -729,6 +774,10 @@ input_pickable = false
 position = Vector2(-10.75, 2.5)
 shape = SubResource("RectangleShape2D_a8y0u")
 
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="Press/Area2D" unique_id=2072204799]
+stream = ExtResource("15_vchkt")
+volume_db = -6.753
+
 [node name="Lever" type="Node2D" parent="Press" unique_id=1738501484]
 position = Vector2(1089, 60)
 
@@ -940,6 +989,9 @@ tint_progress = Color(0, 0.9989807, 0, 1)
 [node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=1363996439]
 stream = ExtResource("26_5q0nq")
 
+[node name="TurnOnSound" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=1415187056]
+stream = ExtResource("29_vc5cj")
+
 [node name="ElectricityCrash" type="Control" parent="Events" unique_id=1878803399]
 layout_mode = 1
 anchors_preset = 15
@@ -1025,6 +1077,10 @@ visible = false
 z_index = 12
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="beeping" type="AudioStreamPlayer2D" parent="Events/ElectricityCrash" unique_id=520773785]
+stream = ExtResource("38_txyw0")
+parameters/looping = true
 
 [node name="BonusLives" type="Control" parent="Events" unique_id=2024648769 node_paths=PackedStringArray("main")]
 anchors_preset = 0
@@ -1153,6 +1209,50 @@ position = Vector2(924, 533)
 [node name="Marker2D6" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=1866258994]
 position = Vector2(1111, 628)
 
+[node name="mop" type="AudioStreamPlayer2D" parent="Events/BossBlack/Shitter" unique_id=956162112]
+stream = ExtResource("44_cjqg0")
+
+[node name="DamageOverlay" type="ColorRect" parent="Events/BossBlack/Shitter" unique_id=1625562461]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Monkey" type="Control" parent="Events" unique_id=2054358397 node_paths=PackedStringArray("press_node")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("48_nvyfr")
+press_node = NodePath("../../Press")
+max_delay = 5.0
+
+[node name="MonkeyAnim" type="AnimationPlayer" parent="Events/Monkey" unique_id=1420440762]
+libraries/ = SubResource("AnimationLibrary_0loja")
+
+[node name="MonkeyTexture" type="TextureRect" parent="Events/Monkey" unique_id=1107102448]
+z_index = 1
+layout_mode = 0
+offset_left = 743.0
+offset_top = -127.0
+offset_right = 870.0051
+offset_bottom = -0.9991455
+texture = ExtResource("49_j2jfr")
+
+[node name="MonkeyFace" type="TextureRect" parent="Events/Monkey/MonkeyTexture" unique_id=1193812221]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3621901
+anchor_top = 0.103173904
+anchor_right = 0.54328513
+anchor_bottom = 0.20634781
+grow_horizontal = 2
+texture = ExtResource("50_bjg73")
+metadata/_edit_use_anchors_ = true
+
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false
 self_modulate = Color(1, 0, 0, 1)
@@ -1177,3 +1277,4 @@ position = Vector2(1186, 54)
 [connection signal="timeout" from="Press/Lever/LeverCooldown" to="Press" method="_on_lever_cooldown_timeout"]
 [connection signal="mouse_entered" from="Events/Lights/LightLever/A_Lever" to="Events/Lights" method="_on_a_lever_mouse_entered"]
 [connection signal="pressed" from="Events/BossBlack/BossTextControl/VBoxContainer/Button" to="Events/BossBlack" method="_on_button_pressed"]
+[connection signal="gui_input" from="Events/Monkey/MonkeyTexture" to="Events/Monkey" method="_on_monkey_texture_gui_input"]

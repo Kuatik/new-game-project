@@ -1,5 +1,7 @@
 extends Node2D
 
+signal body_destroyed
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var lever_progress: TextureProgressBar = $Lever/LeverProgress
 @onready var lever_texture: TextureRect = $Lever/LeverTexture
@@ -7,6 +9,7 @@ extends Node2D
 @onready var audio: AudioStreamPlayer2D = $Audio
 
 @onready var lever_cooldown: Timer = $Lever/LeverCooldown
+@onready var destroy_sound: AudioStreamPlayer2D = $Area2D/DestroySound
 
 var event_active: bool = false
 
@@ -59,8 +62,26 @@ func _revert_lever():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is DraggableShape:
 		body.destroy()
+		body_destroyed.emit()
+		destroy_sound.playing = true
 
 
 func _on_lever_cooldown_timeout() -> void:
 	lever_texture.visible = true
 	lever_texture_Active.visible = false
+
+# FOR MONKEY
+
+# Добавьте эту функцию в конец press.gd
+func activate_press():
+	print("activate_press() ПРИШЛО")
+	if lever_cooldown.is_stopped() and event_active:
+		value = 100
+		set_value()
+		lever_texture.visible = false
+		lever_texture_Active.visible = true
+		animation_player.play("press")
+		# audio.play()
+		value = 0
+		set_value()
+		lever_cooldown.start()

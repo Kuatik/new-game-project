@@ -11,12 +11,16 @@ signal event_finished
 
 var temp_force: float
 var shits_to_clean: int = 0
+@onready var mop: AudioStreamPlayer2D = $Shitter/mop
 
 const CURSOR = preload("uid://cn5lkwqhoykaw")
 
 @onready var shitter: Control = $Shitter
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var spawn_points: Control = $Shitter/SpawnPoints
+
+@onready var damage_overlay: ColorRect = $Shitter/DamageOverlay
+
 
 const KAKISH_1 = preload("uid://cb1ner46pwoky")
 const KAKISH_2 = preload("uid://jry0yklixqgc")
@@ -104,13 +108,28 @@ func _on_mouse_entered_shit(shit_node: Node):
 		return
 	var hits = shit_node.get_meta("hits", 0) + 1
 	shit_node.set_meta("hits", hits)
+	mop.playing = true
+	shit_node.get_node_or_null("CleanParticles").emitting = true
 	if hits >= 3:
 		shit_node.queue_free()
 		shits.erase(shit_node)
 		shits_to_clean -= 1
-		
+		mop.playing = false
 		if shits_to_clean <= 0:
+			flash_damage()
+			await get_tree().create_timer(3).timeout
+
 			stop_event()
+	#print("YOU ARE TOUCHIN THE SHIT")
+	
+
+func flash_damage():
+	#damage_overlay.modulate.a = 0.7
+	damage_overlay.color = Color(0.0, 1.0, 0.0, 0.702)
+	var tween = create_tween()
+	tween.tween_property(damage_overlay, "color:a", 0.0, 1.3)
+
+func _play_sound():
 	print("YOU ARE TOUCHIN THE SHIT")
 	
 
@@ -132,8 +151,10 @@ func spawn_shit():
 			shit.texture = texture
 			shit.set_meta("hits", 0)
 			shit.mouse_entered.connect(_on_mouse_entered_shit.bind(shit))
+			#shit.get_node("Area2D").mouse_entered.connect(_play_sound)
 			point.add_child(shit)
 			shits.append(shit)
 			shits_to_clean += 1
 	if shits_to_clean == 0:
+		flash_damage()
 		stop_event()

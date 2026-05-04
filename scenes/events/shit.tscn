@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://d2ffgs3mwhmvf"]
 
 [ext_resource type="Texture2D" uid="uid://cwkll5oacy7to" path="res://assets/allat_of_things/Kakish.png" id="1_1iq13"]
+[ext_resource type="Texture2D" uid="uid://btrfrery5j25s" path="res://assets/allat_of_things/Clean particle.png" id="2_ww5hi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1iq13"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q1hvh"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, -50, 0)
 
 [node name="shit" type="TextureRect" unique_id=211110847]
 anchors_preset = 8
@@ -22,8 +31,15 @@ texture = ExtResource("1_1iq13")
 [node name="Area2D" type="Area2D" parent="." unique_id=355595210]
 visible = false
 position = Vector2(23.5, 23)
-scale = Vector2(2.55, 2.55)
+scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1983132966]
 shape = SubResource("CircleShape2D_1iq13")
 disabled = true
+
+[node name="CleanParticles" type="GPUParticles2D" parent="." unique_id=1250398810]
+position = Vector2(24.5, 3)
+emitting = false
+amount = 2
+texture = ExtResource("2_ww5hi")
+process_material = SubResource("ParticleProcessMaterial_q1hvh")
