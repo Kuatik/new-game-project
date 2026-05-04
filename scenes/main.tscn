@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
 [ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
+[ext_resource type="AudioStream" uid="uid://cg5dvyyu3r344" path="res://assets/sound_effects/fart.mp3" id="47_o7ddy"]
 [ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
@@ -704,12 +705,13 @@ mouse_filter = 2
 position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
 main = NodePath("..")
+wait_time = 60.0
 light_bulb = NodePath("../green_bulb")
 
 [node name="walls" type="Node" parent="." unique_id=584706517]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="walls" unique_id=4139228]
-position = Vector2(-670, 114)
+position = Vector2(-81, 168)
 scale = Vector2(8, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D" unique_id=2937424]
@@ -761,7 +763,7 @@ texture = ExtResource("4_tbgi4")
 flip_h = true
 
 [node name="Spawner" type="Marker2D" parent="." unique_id=512765533]
-position = Vector2(10, 463)
+position = Vector2(46, 463)
 
 [node name="conveyor" parent="." unique_id=1389983932 instance=ExtResource("2_sugp2")]
 unique_name_in_owner = true
@@ -916,8 +918,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 3.0
-max_delay = 5.0
+min_delay = 10.0
+max_delay = 20.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -928,7 +930,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
-Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -1121,6 +1122,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("25_og1vs")
+Enabled = true
 main = NodePath("../..")
 
 [node name="BossBlack" type="Control" parent="Events" unique_id=1972383344 node_paths=PackedStringArray("spawn_timer", "receiver_timer", "conveyor", "ui")]
@@ -1132,6 +1134,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
+Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1255,12 +1258,14 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
+[node name="fart" type="AudioStreamPlayer2D" parent="Events/BossBlack/Shitter" unique_id=437877489]
+stream = ExtResource("47_o7ddy")
+
 [node name="Monkey" type="Control" parent="Events" unique_id=2054358397 node_paths=PackedStringArray("press_node")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("48_nvyfr")
-Enabled = false
 press_node = NodePath("../../Press")
 max_delay = 5.0
 
@@ -1313,7 +1318,7 @@ position = Vector2(1186, 54)
 stream = ExtResource("51_bjg73")
 volume_db = -24.06
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]

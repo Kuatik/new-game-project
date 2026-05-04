@@ -12,6 +12,8 @@ signal event_finished
 var temp_force: float
 var shits_to_clean: int = 0
 @onready var mop: AudioStreamPlayer2D = $Shitter/mop
+@onready var fart: AudioStreamPlayer2D = $Shitter/fart
+
 
 const CURSOR = preload("uid://cn5lkwqhoykaw")
 
@@ -115,6 +117,9 @@ func _on_mouse_entered_shit(shit_node: Node):
 		shits.erase(shit_node)
 		shits_to_clean -= 1
 		mop.playing = false
+		var rand_fart = randi_range(0,2)
+		if rand_fart == 1:
+			fart.play(1.1)
 		if shits_to_clean <= 0:
 			flash_damage()
 			await get_tree().create_timer(3).timeout
