@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cefby30mbjw1w" path="res://assets/tutorials/tutor_order.png" id="2_nhlb8"]
 [ext_resource type="Texture2D" uid="uid://bsbap2m2p704d" path="res://assets/tutorials/tutor_press.png" id="3_law3w"]
 [ext_resource type="Texture2D" uid="uid://dv3x48fyqxful" path="res://assets/tutorials/next_page.png" id="4_fd7ko"]
+[ext_resource type="Texture2D" uid="uid://c3cy44kp3behu" path="res://assets/tutorials/tutor_time.png" id="4_l7vi7"]
 [ext_resource type="Texture2D" uid="uid://h5msosn0lb20" path="res://assets/tutorials/tutor_items.png" id="4_nhlb8"]
 [ext_resource type="Script" uid="uid://c2k2io7msg2c2" path="res://scripts/arrow_button.gd" id="5_l7vi7"]
 [ext_resource type="Texture2D" uid="uid://jyykqgpevfyh" path="res://assets/tutorials/close_button.png" id="7_law3w"]
@@ -101,7 +102,7 @@ offset_right = 413.5
 offset_bottom = 223.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_nhlb8")
+texture = ExtResource("4_l7vi7")
 
 [node name="Items" type="TextureRect" parent="TutorialPages" unique_id=297121607]
 layout_mode = 1
