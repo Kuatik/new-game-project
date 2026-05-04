@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
 [ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
+[ext_resource type="AudioStream" uid="uid://cq4pbkooi4vps" path="res://assets/sound_effects/fart.mp3" id="47_bu4jf"]
 [ext_resource type="Script" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
@@ -1122,6 +1123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
+Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1245,11 +1247,16 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
+[node name="Fart" type="AudioStreamPlayer2D" parent="Events/BossBlack" unique_id=54563305]
+stream = ExtResource("47_bu4jf")
+volume_db = -34.537
+
 [node name="Monkey" type="Control" parent="Events" unique_id=2054358397 node_paths=PackedStringArray("press_node")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("48_nvyfr")
+Enabled = false
 press_node = NodePath("../../Press")
 max_delay = 5.0
 
