@@ -8,8 +8,6 @@ signal event_finished
 @export var receiver_timer: Node
 @export var conveyor: Node
 @export var ui: Node
-@export var min_fart_delay = 4
-@export var max_fart_delay = 9
 
 var temp_force: float
 var shits_to_clean: int = 0
@@ -22,7 +20,6 @@ const CURSOR = preload("uid://cn5lkwqhoykaw")
 @onready var shitter: Control = $Shitter
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var spawn_points: Control = $Shitter/SpawnPoints
-@onready var fart = $Fart
 
 @onready var damage_overlay: ColorRect = $Shitter/DamageOverlay
 
@@ -34,36 +31,20 @@ const PUDDLE = preload("uid://d2hr7yw0etohv")
 const SHIT = preload("uid://d2ffgs3mwhmvf")
 
 const MOP = preload("uid://nnw3owgwx575")
-
-var fart_timer
-
 #@onready var SHIT: Node = preload("uid://d2ffgs3mwhmvf")
 var shits: Array[Node] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	fart_timer = Timer.new()
-	add_child(fart_timer)
 	shitter.visible = false
 	#original_cursor_arrow = Input.custom
 	#pass # Replace with function body.
 
-func start_random_timer(timer):
-	timer.wait_time = randf_range(min_fart_delay, max_fart_delay)
-	timer.start()
-	
-
-func _on_fart_timer_timeout():
-	fart.play()
-	start_random_timer(fart_timer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func start_event():
-	Global.enable(fart_timer)
-	fart_timer.timeout.connect(_on_fart_timer_timeout)
-	start_random_timer(fart_timer)
 	if check_exports():
 		temp_force = conveyor.get_push_force()
 		print("temp_force: ", temp_force)
@@ -82,7 +63,6 @@ func stop_event():
 	if not Enabled:
 		event_finished.emit()
 		return
-	Global.disable(fart_timer)
 	Input.set_custom_mouse_cursor(CURSOR, Input.CURSOR_ARROW, Vector2(27,0))
 	ui.visible = true
 	shitter.visible = false
@@ -138,6 +118,7 @@ func _on_mouse_entered_shit(shit_node: Node):
 		shits_to_clean -= 1
 		mop.playing = false
 		var rand_fart = randi_range(0,2)
+		#var rand_fart = 1
 		if rand_fart == 1:
 			fart.play(1.1)
 		if shits_to_clean <= 0:
