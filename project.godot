@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
-run/main_scene="uid://155xx7s6y6ta"
+config/name="Acoustic DisOrder"
+run/main_scene="uid://likwfdmbss2e"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://drfahj158gnmx"
 

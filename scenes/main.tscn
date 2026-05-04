@@ -50,8 +50,8 @@
 [ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
-[ext_resource type="AudioStream" uid="uid://cbo7lbd1v8cfd" path="res://assets/sound_effects/bg_music.mp3" id="51_bjg73"]
 [ext_resource type="AudioStream" uid="uid://cnn88ye6gdnek" path="res://assets/sound_effects/stu9-monkey-352770.mp3" id="50_bu4jf"]
+[ext_resource type="AudioStream" uid="uid://cbo7lbd1v8cfd" path="res://assets/sound_effects/bg_music.mp3" id="51_bjg73"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -691,29 +691,14 @@ text = "Previous Score: 100"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=177562907]
-offset_left = 474.0
-offset_top = 351.0
-offset_right = 828.0
-offset_bottom = 439.0
-
-[node name="HighScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=836227120]
-custom_minimum_size = Vector2(82, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "High Score: 100"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="PreviousScoreLabel" type="Label" parent="UI/VBoxContainer" unique_id=1448244947]
-custom_minimum_size = Vector2(82, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Previous Score: 100"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Explosions" type="Control" parent="UI" unique_id=365522318]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main", "light_bulb") instance=ExtResource("1_0wfyh")]
 position = Vector2(1295, 539)
@@ -931,8 +916,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 20.0
-max_delay = 30.0
+min_delay = 3.0
+max_delay = 5.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -943,6 +928,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
+Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -1146,7 +1132,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
-Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1275,6 +1260,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("48_nvyfr")
+Enabled = false
 press_node = NodePath("../../Press")
 max_delay = 5.0
 
