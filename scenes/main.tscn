@@ -19,7 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cwdo4k5n0cner" path="res://assets/bg/ProgressBar/progress-bar-circle.png" id="16_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://cln5545bnny3w" path="res://assets/bg/ProgressBar/progress-bar-frame.png" id="17_muem4"]
 [ext_resource type="Texture2D" uid="uid://ce4sop35fyth7" path="res://assets/bg/Press lever 2.png" id="19_0ld40"]
-[ext_resource type="AudioStream" uid="uid://dh6mic0860wy3" path="res://assets/sound_effects/industrial_press.wav" id="20_5q0nq"]
+[ext_resource type="AudioStream" uid="uid://xo2l1ub1g136" path="res://assets/sound_effects/universfield-impact-cinematic-boom-02-487858.mp3" id="20_2cjbq"]
+[ext_resource type="AudioStream" uid="uid://4rt23v04swbc" path="res://assets/sound_effects/universfield-cinematic-impact-hit-02-454665.mp3" id="20_chjal"]
 [ext_resource type="Script" uid="uid://c5jff0w1wpwai" path="res://scripts/events.gd" id="20_gqmmt"]
 [ext_resource type="Script" uid="uid://ctjvgrtoru66g" path="res://scripts/events/lights.gd" id="21_yc10j"]
 [ext_resource type="Texture2D" uid="uid://b7el8acjpeh8x" path="res://assets/allat_of_things/Smoke.png" id="22_jscy8"]
@@ -31,8 +32,17 @@
 [ext_resource type="Shader" uid="uid://bkkw0bc24krjm" path="res://scenes/main.gdshader" id="26_2f3dj"]
 [ext_resource type="AudioStream" uid="uid://cvn1ka08p0tm1" path="res://assets/sound_effects/power_outage1.wav" id="26_5q0nq"]
 [ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="26_vxglm"]
+[ext_resource type="Texture2D" uid="uid://c1tdcj0e4uf7j" path="res://assets/allat_of_things/Smoke 1.png" id="29_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="29_fv21b"]
+[ext_resource type="Material" uid="uid://bq6aicopp8pbh" path="res://assets/smoke_tres/new_particle_process_material.tres" id="29_j8jky"]
 [ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="30_tel4y"]
+[ext_resource type="Material" uid="uid://b8j22b3yclcx6" path="res://assets/smoke_tres/2_smaller.tres" id="31_kmb1v"]
+[ext_resource type="Script" uid="uid://pvpeqou41vgj" path="res://scenes/events/boss_black.gd" id="37_fuf3a"]
+[ext_resource type="Texture2D" uid="uid://815caiyulxc1" path="res://assets/allat_of_things/Boss Black.png" id="38_5poiv"]
+[ext_resource type="Texture2D" uid="uid://bx2eiycspnivf" path="res://assets/allat_of_things/Boss Black 2.png" id="39_2cjbq"]
+[ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
+[ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
+[ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -49,10 +59,10 @@ animations = [{
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
-bg_color = Color(0.9764706, 0.3019608, 0.6392157, 0)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
-bg_color = Color(0.004019165, 0.009404905, 0.004019165, 0.60784316)
+bg_color = Color(0.003921569, 1, 0.003921569, 0.60784316)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 
@@ -156,6 +166,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Hit:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_jkv2x"]
@@ -268,6 +290,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Hit:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.03333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jbj1t"]
 _data = {
@@ -278,22 +312,143 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8y0u"]
 size = Vector2(159.5, 101)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yc10j"]
-lifetime_randomness = 1.0
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-angle_min = -44.99999
-angle_max = 45.00001
-spread = 80.0
-initial_velocity_min = 10.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, -50, 0)
-scale_min = 0.099999994
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yq6so"]
 shader = ExtResource("26_2f3dj")
-shader_parameter/speed = 5.00000021375
-shader_parameter/intensity = 0.94400004484
+shader_parameter/speed = 10.0
+shader_parameter/intensity = 1.0
+
+[sub_resource type="Animation" id="Animation_vchkt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("38_5poiv"), ExtResource("38_5poiv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(757, 220), Vector2(1392, 373)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.61, 0.61)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boss:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [273.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossTextControl:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_txyw0"]
+resource_name = "boss"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.53333336, 0.93333334, 1.3333334, 1.7333333, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("38_5poiv"), ExtResource("39_2cjbq"), ExtResource("40_chjal"), ExtResource("39_2cjbq"), ExtResource("40_chjal"), ExtResource("39_2cjbq"), ExtResource("41_cjqg0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1287, 273), Vector2(641, 255)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boss:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6333333, 0.91, 1.21, 1.53, 1.8299999, 2.1000001, 2.4, 2.58, 2.8799999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [273.0, 283.0, 273.0, 283.0, 273.0, 283.0, 273.0, 283.0, 273.0, 283.0, 273.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossTextControl:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vc5cj"]
+_data = {
+&"RESET": SubResource("Animation_vchkt"),
+&"boss": SubResource("Animation_txyw0")
+}
 
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
@@ -360,7 +515,8 @@ offset_left = 161.0
 offset_top = 83.0
 offset_right = 201.0
 offset_bottom = 123.0
-theme_override_constants/separation = 10
+scale = Vector2(0.8, 0.8)
+theme_override_constants/separation = 20
 metadata/_edit_use_anchors_ = true
 
 [node name="LifeLabel" type="Label" parent="UI" unique_id=1502931339]
@@ -451,6 +607,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
 value = 90.0
 
 [node name="ResetButton" type="Button" parent="UI" unique_id=1085320004]
+visible = false
 custom_minimum_size = Vector2(180, 0)
 anchors_preset = 5
 anchor_left = 0.5
@@ -493,11 +650,13 @@ scale = Vector2(72, 8)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="walls" unique_id=168968393]
-position = Vector2(-415.00024, 905.9999)
-rotation = 0.50884074
-scale = Vector2(72, 8)
+position = Vector2(-245.99994, 961)
+rotation = -0.17891586
+scale = Vector2(12.555853, 2.3602371)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D5" unique_id=2081992307]
+position = Vector2(7.528972, -61.98906)
+scale = Vector2(1.0000001, 1.0000002)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="walls" unique_id=778207370]
@@ -656,8 +815,11 @@ theme_override_font_sizes/font_size = 20
 text = "Hold E"
 metadata/_edit_use_anchors_ = true
 
+[node name="Hit" type="AudioStreamPlayer2D" parent="Press" unique_id=2055402277]
+stream = ExtResource("20_chjal")
+
 [node name="Audio" type="AudioStreamPlayer2D" parent="Press" unique_id=2062223555]
-stream = ExtResource("20_5q0nq")
+stream = ExtResource("20_2cjbq")
 
 [node name="Events" type="Control" parent="." unique_id=172626006]
 layout_mode = 3
@@ -670,8 +832,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 10.0
-max_delay = 20.0
+min_delay = 1.0
+max_delay = 5.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -682,6 +844,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
+Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -786,6 +949,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
+Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -794,7 +958,16 @@ amount = 18
 texture = ExtResource("22_jscy8")
 lifetime = 10.0
 randomness = 0.5
-process_material = SubResource("ParticleProcessMaterial_yc10j")
+process_material = ExtResource("29_j8jky")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=1142680859]
+z_index = -2
+position = Vector2(164, 376)
+amount = 18
+texture = ExtResource("29_dgi5k")
+lifetime = 10.0
+randomness = 0.5
+process_material = ExtResource("31_kmb1v")
 
 [node name="BulbTexture" type="TextureRect" parent="Events/ElectricityCrash" unique_id=1443466049]
 self_modulate = Color(1, 0, 0, 1)
@@ -860,7 +1033,145 @@ offset_bottom = 40.0
 script = ExtResource("25_og1vs")
 main = NodePath("../..")
 
+[node name="BossBlack" type="Control" parent="Events" unique_id=1972383344 node_paths=PackedStringArray("spawn_timer", "receiver_timer", "conveyor", "ui")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("37_fuf3a")
+Enabled = true
+spawn_timer = NodePath("../../SpawnTimer")
+receiver_timer = NodePath("../../Receiver")
+conveyor = NodePath("../../conveyor")
+ui = NodePath("../../UI")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Events/BossBlack" unique_id=1321835467]
+libraries/ = SubResource("AnimationLibrary_vc5cj")
+autoplay = &"RESET"
+
+[node name="Boss" type="TextureRect" parent="Events/BossBlack" unique_id=1684858004]
+z_index = -1
+layout_mode = 0
+offset_left = 757.0
+offset_top = 220.0
+offset_right = 959.0217
+offset_bottom = 496.04883
+scale = Vector2(0.61, 0.61)
+texture = ExtResource("38_5poiv")
+
+[node name="BossTextControl" type="Control" parent="Events/BossBlack" unique_id=1338765366]
+visible = false
+custom_minimum_size = Vector2(300, 120)
+anchors_preset = 0
+offset_left = 808.0
+offset_top = 307.0
+offset_right = 1108.0
+offset_bottom = 407.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Events/BossBlack/BossTextControl" unique_id=209869805]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.37212572, 0.5894607, 0.72253865, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Events/BossBlack/BossTextControl" unique_id=1055768168]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = -55.0
+offset_right = 136.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Events/BossBlack/BossTextControl/VBoxContainer" unique_id=67720582]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "BOSS:
+Hey you! What are you doing here?!
+Go clean the shitter!"
+
+[node name="Button" type="Button" parent="Events/BossBlack/BossTextControl/VBoxContainer" unique_id=769971495]
+layout_mode = 2
+text = "RIGHT NOW!"
+
+[node name="Shitter" type="Control" parent="Events/BossBlack" unique_id=720282734]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Events/BossBlack/Shitter" unique_id=2060138458]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_2cjbq")
+
+[node name="SpawnPoints" type="Control" parent="Events/BossBlack/Shitter" unique_id=408134578]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=469915465]
+position = Vector2(176, 503)
+
+[node name="Marker2D2" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=1909897768]
+position = Vector2(345, 612)
+
+[node name="Marker2D3" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=1540575403]
+position = Vector2(585, 526)
+
+[node name="Marker2D4" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=49262911]
+position = Vector2(756, 640)
+
+[node name="Marker2D5" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=145369483]
+position = Vector2(924, 533)
+
+[node name="Marker2D6" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=1866258994]
+position = Vector2(1111, 628)
+
+[node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_yq6so")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1150.0
+offset_top = 408.0
+offset_right = 1182.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_vxglm")
+flip_h = true
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Press/Lever/LeverCooldown" to="Press" method="_on_lever_cooldown_timeout"]
 [connection signal="mouse_entered" from="Events/Lights/LightLever/A_Lever" to="Events/Lights" method="_on_a_lever_mouse_entered"]
+[connection signal="pressed" from="Events/BossBlack/BossTextControl/VBoxContainer/Button" to="Events/BossBlack" method="_on_button_pressed"]

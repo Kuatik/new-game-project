@@ -15,10 +15,13 @@ extends Node2D
 @onready var idle_progress: ProgressBar = $UI/IdleProgress
 
 
+@onready var green_bulb: TextureRect = $green_bulb
+
 
 const SHAPE_SCENE = preload("res://scenes/shape.tscn")
 const TICK_SCENE = preload("res://scenes/tick.tscn")
-const OUTLINE = preload("uid://m6u5b2ikg5tu")
+#const OUTLINE = preload("uid://m6u5b2ikg5tu")
+const OUTLINE = preload("uid://bi7w55yitwh8s")
 
 
 var all_combinations: Array[String] = [] # Все возможные комбинации спавна
@@ -301,11 +304,16 @@ func try_accept_shape(shape: DraggableShape):
 	print("shape star collision: ", shape.star_collision.disabled)
 	print("shape triangle collision: ", shape.triangle_collision.disabled)
 	if is_universal or shape_id == required_now:
+		
+		
 		shape.destroy()
 		current_index += 1
 		update_ui_sequence()
 		if current_index >= required_sequence.size():
 			win_game()
+		green_bulb.visible = true
+		await get_tree().create_timer(1).timeout
+		green_bulb.visible = false
 	else:
 		reduce_score_gain()
 		take_damage()

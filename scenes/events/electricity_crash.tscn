@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dqtb2ce2i7qjp"]
+
+[ext_resource type="Script" uid="uid://gpe2s2i40q8v" path="res://scripts/events/electricity_crash.gd" id="1_bujrf"]
+[ext_resource type="Texture2D" uid="uid://b7el8acjpeh8x" path="res://assets/allat_of_things/Smoke.png" id="2_yrau8"]
+[ext_resource type="Shader" uid="uid://bkkw0bc24krjm" path="res://scenes/main.gdshader" id="3_cj355"]
+[ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="4_0emue"]
+[ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="5_6w7ij"]
+[ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="6_ocdwr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yc10j"]
+lifetime_randomness = 1.0
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -44.99999
+angle_max = 45.00001
+spread = 80.0
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, -50, 0)
+scale_min = 0.099999994
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yq6so"]
+shader = ExtResource("3_cj355")
+shader_parameter/speed = 5.00000021375
+shader_parameter/intensity = 0.94400004484
+
+[node name="ElectricityCrash" type="Control" unique_id=1718027822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_bujrf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=712686769]
+z_index = -2
+position = Vector2(164, 376)
+amount = 18
+texture = ExtResource("2_yrau8")
+lifetime = 10.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_yc10j")
+
+[node name="BulbTexture" type="TextureRect" parent="." unique_id=777656887]
+self_modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_yq6so")
+layout_mode = 0
+offset_left = 174.0
+offset_top = 421.0
+offset_right = 206.0
+offset_bottom = 444.0
+texture = ExtResource("4_0emue")
+
+[node name="TextureRect" type="TextureRect" parent="BulbTexture" unique_id=882719710]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -151.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_6w7ij")
+
+[node name="ElectricityCrashGuide" type="Label" parent="BulbTexture" unique_id=1984764281]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -29.5
+offset_right = 177.0
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press Esc"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="." unique_id=224680205]
+visible = false
+layout_mode = 0
+offset_left = 208.0
+offset_top = 378.0
+offset_right = 240.0
+offset_bottom = 409.0
+text = "FIX"
+
+[node name="FixMachine" parent="." unique_id=1273771238 instance=ExtResource("6_ocdwr")]
+visible = false
+z_index = 12
+layout_mode = 1
+metadata/_edit_use_anchors_ = true

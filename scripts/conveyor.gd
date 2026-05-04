@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 		if body is RigidBody2D and body.get_meta("on_conveyor", false):
 			body.apply_central_force(Vector2(push_force, 0))
 
-func get_push_force():
+func get_push_force() -> float:
 	return push_force
 
 func set_push_force(force: float) -> void:

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bi7w55yitwh8s"]
+
+[ext_resource type="Texture2D" uid="uid://ji05exon6gc5" path="res://assets/allat_of_things/Select Frame.png" id="1_jtx5x"]
+
+[node name="OutlineRect" type="TextureRect" unique_id=440244402]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_jtx5x")

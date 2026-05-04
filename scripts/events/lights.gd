@@ -18,6 +18,7 @@ signal event_finished
 @onready var a_lever: TextureRect = $LightLever/A_Lever
 #endregion
 #region Export Nodes
+@export var Enabled: bool = true
 @export var spawn_timer: Timer
 @export var hold_duration: float = 3.0
 #endregion
@@ -91,6 +92,12 @@ func start_conveyor():
 func start_event():
 	if is_active:
 		return
+	if not Enabled:
+		print("Event is NOT ENABLED")
+		temp_force = conveyor.get_push_force()
+		
+		stop_event()
+		return
 	is_active = true
 	turn_lights_off()
 	stop_conveyor()
@@ -99,13 +106,14 @@ func start_event():
 	holding = false
 
 func stop_event():
-	if not is_active:
-		return
+	#if not is_active:
+		#return
 	is_active = false
 	turn_lights_on()
 	start_conveyor()
 	# Отправить сигнал что ивент закончен.
 	event_finished.emit()
+	print("event_finished.emit()")
 
 func _on_a_lever_gui_input(event: InputEvent) -> void:
 	if not is_active:

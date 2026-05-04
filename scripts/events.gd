@@ -52,6 +52,7 @@ func _on_event_finished():
 		current_event = null
 	var wait_time = randf_range(min_delay, max_delay)
 	delay_timer.start(wait_time)
+	print("New event timer started: ", wait_time)
 	press.event_active = false
 	#pass
 

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d2ffgs3mwhmvf"]
+
+[ext_resource type="Texture2D" uid="uid://cwkll5oacy7to" path="res://assets/allat_of_things/Kakish.png" id="1_1iq13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1iq13"]
+
+[node name="shit" type="TextureRect" unique_id=211110847]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -20.0
+offset_right = 23.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("1_1iq13")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=355595210]
+visible = false
+position = Vector2(23.5, 23)
+scale = Vector2(2.55, 2.55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1983132966]
+shape = SubResource("CircleShape2D_1iq13")
+disabled = true

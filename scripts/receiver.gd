@@ -5,6 +5,8 @@ extends Area2D
 @export var wait_time: float
 @onready var idle_timer: Timer
 
+@export var light_bulb: Node
+
 func _ready() -> void:
 	idle_timer = Timer.new()
 	add_child(idle_timer)
