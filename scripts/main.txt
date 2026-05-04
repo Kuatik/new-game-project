@@ -109,7 +109,8 @@ func generate_sequence(length: int):
 
 func update_ui_sequence():
 	for child in ui_sequence.get_children():
-		child.queue_free()
+		#child.queue_free()
+		child.free()
 	
 	for i in range(0, required_sequence.size()):
 		var combo = required_sequence[i]
@@ -120,7 +121,8 @@ func update_ui_sequence():
 		var icon = create_preview_icon(shape_name, color_name, is_current)
 		ui_sequence.add_child(icon)
 		if i < current_index:
-			icon.get_node("Container/Tick").visible = true
+			icon.get_node("Tick").visible = true
+
 
 		
 #func mark_ui_sequence():
@@ -132,7 +134,7 @@ func update_ui_sequence():
 		#var icon = create_preview_icon(shape_name, color_name)
 		#icon.get_node("Tick").visible = true
 
-func create_preview_icon(shape: String, color: String, is_current: bool) -> Control:
+func create_preview_icon(shape: String, color: String, is_current: bool = false) -> Control:
 	var tick = TICK_SCENE.instantiate()
 	tick.visible = false
 	tick.name = "Tick"
@@ -167,38 +169,29 @@ func create_preview_icon(shape: String, color: String, is_current: bool) -> Cont
 	container.add_child(tick)
 	
 	var panel = Panel.new()
-	#panel.custom_minimum_size = Vector2(64, 64)
-	panel.custom_minimum_size = Vector2(64, 64)
+	panel.custom_minimum_size = Vector2(64,64)
+	panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	panel.add_child(container)
-	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	#panel.anchor_bottom = 0.5
-	#panel.offset_bottom = 34.0
-	#panel.offset_top = 134.0
 	
-	# Стиль для рамки (или её отсутствия)
-	var style = StyleBoxFlat.new()
-	if is_current:
-		style.border_width_left = 3
-		style.border_width_right = 3
-		style.border_width_top = 3
-		style.border_width_bottom = 3
-		style.border_color = Color.YELLOW
-		style.corner_radius_top_left = 8
-		style.corner_radius_top_right = 8
-		style.corner_radius_bottom_left = 8
-		style.corner_radius_bottom_right = 8
-		
-	else:
-		# Невидимая рамка (толщина 0)
-		style.border_width_left = 0
-		style.border_width_right = 0
-		style.border_width_top = 0
-		style.border_width_bottom = 0
-	style.bg_color = Color.TRANSPARENT
-	panel.add_theme_stylebox_override("panel", style)
+	var stylebox = StyleBoxFlat.new()
+	var border_width = 3
+	var border_radius = 8
+	stylebox.border_width_bottom = border_width
+	stylebox.border_width_top = border_width
+	stylebox.border_width_left = border_width
+	stylebox.border_width_right = border_width
+	stylebox.border_color = Color.YELLOW
+	stylebox.bg_color = Color.TRANSPARENT
+	stylebox.corner_radius_bottom_left = border_radius
+	stylebox.corner_radius_bottom_right = border_radius
+	stylebox.corner_radius_top_right = border_radius
+	stylebox.corner_radius_top_left = border_radius
 	
-	#return container
-	return panel
+	panel.add_theme_stylebox_override("panel", stylebox)
+	panel.visible = is_current
+	
+	return container
 
 func create_temp_sprite_frames() -> SpriteFrames:
 	# Экстренный вариант – создаёт пустые анимации. Лучше так не делать, настройте preview_sprite_frames.

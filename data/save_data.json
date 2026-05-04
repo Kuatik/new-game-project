@@ -1,7 +1,11 @@
 {
 	"finished_tutorial": "false",
-	"high_score": 100,
+	"high_score": 100.0,
 	"scores": [
-		100
+		100.0,
+		0.0,
+		0.0,
+		0.0,
+		0
 	]
 }
