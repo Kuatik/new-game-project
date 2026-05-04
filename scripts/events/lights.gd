@@ -7,8 +7,10 @@ signal event_finished
 @onready var lights_color_2: ColorRect = $LightsColor2
 @onready var conveyor: Area2D = %conveyor
 @onready var lever_progress: TextureProgressBar = $LightLever/LeverProgress
+@onready var audio: AudioStreamPlayer2D = $Audio
 
 #endregion
+
 
 #region Lever Textures
 
@@ -59,6 +61,7 @@ func _process(delta: float) -> void:
 #region Light Switchers
 
 func turn_lights_off():
+	audio.play()
 	lights_color.visible = true
 	lights_color_2.visible = true
 	a_lever.visible = true

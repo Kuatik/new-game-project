@@ -63,6 +63,7 @@ var color_map = {
 ]
 
 func _ready():
+	Global.disable(reset_button)
 	score_label.text = str(score)
 	for color in colors:
 		for shape in shapes:
@@ -332,6 +333,7 @@ func win_game():
 
 func lose_game():
 	#get_tree().paused = true
+	Global.enable(reset_button)
 	game_lost = true
 	save_score(score)
 	score = 0
@@ -356,6 +358,7 @@ func save_score(score):
 	Global.save_data = new_save_data
 
 func _reset_game():
+	Global.disable(reset_button)
 	game_lost = false
 	get_tree().paused = false
 	get_tree().reload_current_scene()
