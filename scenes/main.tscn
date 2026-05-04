@@ -854,6 +854,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
+Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -961,6 +962,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
+Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -1123,7 +1125,6 @@ layout_mode = 2
 text = "RIGHT NOW!"
 
 [node name="Shitter" type="Control" parent="Events/BossBlack" unique_id=720282734]
-visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 15
@@ -1171,6 +1172,16 @@ position = Vector2(1111, 628)
 
 [node name="mop" type="AudioStreamPlayer2D" parent="Events/BossBlack/Shitter" unique_id=956162112]
 stream = ExtResource("44_cjqg0")
+
+[node name="DamageOverlay" type="ColorRect" parent="Events/BossBlack/Shitter" unique_id=1625562461]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false
