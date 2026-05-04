@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 		lever_texture.visible = false
 		lever_texture_Active.visible = true
 		animation_player.play("press")
-		audio.play()
+		#audio.play()
 		value = 0
 		set_value()
 		lever_cooldown.start()

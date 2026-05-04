@@ -11,11 +11,13 @@ func _ready() -> void:
 	idle_timer.start(wait_time)
 	
 func _on_body_entered(body: Node2D) -> void:
-	idle_timer.start(wait_time)
-	
+	#idle_timer.start(wait_time)
+	pass
 	#if body is DraggableShape:
 		#main.try_accept_shape(body)
 
+func _start_timer():
+	pass
 
 func _on_idle_timer_timeout() -> void:
 	main.punish_idle()

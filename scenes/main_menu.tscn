@@ -465,49 +465,49 @@ flip_h = true
 [node name="Spawner" type="Marker2D" parent="." unique_id=847983618]
 position = Vector2(10, 463)
 
+[node name="walls" type="Node" parent="." unique_id=377425468]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls" unique_id=805014993]
+position = Vector2(-670, 114)
+scale = Vector2(8, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D" unique_id=1485403290]
+shape = SubResource("RectangleShape2D_engjn")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="walls" unique_id=1962292806]
+position = Vector2(1627, 122)
+scale = Vector2(8, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D2" unique_id=463177537]
+shape = SubResource("RectangleShape2D_engjn")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="walls" unique_id=1892033367]
+position = Vector2(631, 638)
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D3" unique_id=702208503]
+shape = SubResource("RectangleShape2D_engjn")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="walls" unique_id=704774546]
+position = Vector2(-415.00024, 905.9999)
+rotation = 0.50884074
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D5" unique_id=364181604]
+shape = SubResource("RectangleShape2D_engjn")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="walls" unique_id=1975086014]
+position = Vector2(631, -126)
+scale = Vector2(72, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D4" unique_id=1293305284]
+shape = SubResource("RectangleShape2D_engjn")
+
 [node name="conveyor" parent="." unique_id=1389983932 instance=ExtResource("10_4puye")]
 unique_name_in_owner = true
 position = Vector2(623, 555.99994)
 rotation = -0.032943428
 push_force = 100.0
-
-[node name="walls" type="Node" parent="conveyor" unique_id=377425468]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="conveyor/walls" unique_id=805014993]
-position = Vector2(-670, 114)
-scale = Vector2(8, 36)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="conveyor/walls/StaticBody2D" unique_id=1485403290]
-shape = SubResource("RectangleShape2D_engjn")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="conveyor/walls" unique_id=1962292806]
-position = Vector2(1627, 122)
-scale = Vector2(8, 36)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="conveyor/walls/StaticBody2D2" unique_id=463177537]
-shape = SubResource("RectangleShape2D_engjn")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="conveyor/walls" unique_id=1892033367]
-position = Vector2(631, 638)
-scale = Vector2(72, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="conveyor/walls/StaticBody2D3" unique_id=702208503]
-shape = SubResource("RectangleShape2D_engjn")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="conveyor/walls" unique_id=704774546]
-position = Vector2(-415.00024, 905.9999)
-rotation = 0.50884074
-scale = Vector2(72, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="conveyor/walls/StaticBody2D5" unique_id=364181604]
-shape = SubResource("RectangleShape2D_engjn")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="conveyor/walls" unique_id=1975086014]
-position = Vector2(631, -126)
-scale = Vector2(72, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="conveyor/walls/StaticBody2D4" unique_id=1293305284]
-shape = SubResource("RectangleShape2D_engjn")
 
 [node name="machine part" type="Sprite2D" parent="." unique_id=360163056]
 z_index = 2
