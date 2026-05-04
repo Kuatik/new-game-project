@@ -11,6 +11,7 @@ signal event_finished
 
 var temp_force: float
 var shits_to_clean: int = 0
+@onready var mop: AudioStreamPlayer2D = $Shitter/mop
 
 const CURSOR = preload("uid://cn5lkwqhoykaw")
 
@@ -104,11 +105,12 @@ func _on_mouse_entered_shit(shit_node: Node):
 		return
 	var hits = shit_node.get_meta("hits", 0) + 1
 	shit_node.set_meta("hits", hits)
+	mop.playing = true
 	if hits >= 3:
 		shit_node.queue_free()
 		shits.erase(shit_node)
 		shits_to_clean -= 1
-		
+		mop.playing = false
 		if shits_to_clean <= 0:
 			stop_event()
 	print("YOU ARE TOUCHIN THE SHIT")

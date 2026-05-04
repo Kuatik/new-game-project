@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
+[ext_resource type="AudioStream" uid="uid://bhvyq63rt8hc3" path="res://assets/sound_effects/mop.mp3" id="44_cjqg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -498,6 +499,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 texture = ExtResource("3_85g3d")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="background" unique_id=2049725752]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1630964440]
 z_index = 10
@@ -1153,6 +1156,9 @@ position = Vector2(924, 533)
 
 [node name="Marker2D6" type="Marker2D" parent="Events/BossBlack/Shitter/SpawnPoints" unique_id=1866258994]
 position = Vector2(1111, 628)
+
+[node name="mop" type="AudioStreamPlayer2D" parent="Events/BossBlack/Shitter" unique_id=956162112]
+stream = ExtResource("44_cjqg0")
 
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false
