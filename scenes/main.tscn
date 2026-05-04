@@ -50,6 +50,7 @@
 [ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
+[ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -652,7 +653,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
 value = 90.0
 
 [node name="ResetButton" type="Button" parent="UI" unique_id=1085320004]
-visible = false
 custom_minimum_size = Vector2(180, 0)
 anchors_preset = 5
 anchor_left = 0.5
@@ -1268,6 +1268,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_vxglm")
 flip_h = true
+
+[node name="FireExtinguisher" parent="." unique_id=2073946010 instance=ExtResource("44_cjqg0")]
+position = Vector2(1186, 54)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Press/Area2D" to="Press" method="_on_area_2d_body_entered"]
