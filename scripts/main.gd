@@ -9,6 +9,8 @@ extends Node2D
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var reset_button: Button = $UI/ResetButton
 @onready var conveyor: Area2D = $conveyor
+@onready var high_score_label = $UI/VBoxContainer/HighScoreLabel
+@onready var previous_score_label = $UI/VBoxContainer/PreviousScoreLabel
 
 @onready var damage_overlay: ColorRect = $UI/DamageOverlay
 @onready var floating_message: Label = $UI/FloatingMessage
@@ -65,8 +67,10 @@ var color_map = {
 	"Where's the union rep?",
 	"I should have stayed in bed."
 ]
-
+var save_data = null
 func _ready():
+	Global.disable(high_score_label)
+	Global.disable(previous_score_label)
 	Global.disable(reset_button)
 	score_label.text = str(score)
 	for color in colors:
@@ -354,13 +358,19 @@ func win_game():
 func lose_game():
 	#get_tree().paused = true
 	Global.enable(reset_button)
+	Global.enable(high_score_label)
+	Global.enable(previous_score_label)
+	save_data = Global.load_json(Global.save_data_path)
+	high_score_label.text = "High Score: %s" % str(int(save_data.high_score))
+	previous_score_label.text = "Previous Score: %s" % str(int(save_data.scores[-1]))
 	game_lost = true
 	save_score(score)
 	score = 0
 	current_score_gain = max_score_gain
 	var label = Label.new()
 	label.text = "GAME OVER\nPress to restart"
-	label.position = Vector2(300, 200)
+	label.z_index = 999
+	label.position = Vector2(180, 140)
 	label.add_theme_font_size_override("font_size", 40)
 	label.add_theme_color_override("font_color", Color())
 	$background/Patrick.visible = true
@@ -379,6 +389,8 @@ func save_score(score):
 
 func _reset_game():
 	Global.disable(reset_button)
+	Global.disable(high_score_label)
+	Global.disable(previous_score_label)
 	game_lost = false
 	get_tree().paused = false
 	get_tree().reload_current_scene()
