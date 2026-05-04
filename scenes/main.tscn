@@ -47,6 +47,9 @@
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
 [ext_resource type="AudioStream" uid="uid://bhvyq63rt8hc3" path="res://assets/sound_effects/mop.mp3" id="44_cjqg0"]
+[ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
+[ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -452,6 +455,95 @@ tracks/4/keys = {
 _data = {
 &"RESET": SubResource("Animation_vchkt"),
 &"boss": SubResource("Animation_txyw0")
+}
+
+[sub_resource type="Animation" id="Animation_j2jfr"]
+resource_name = "Monkey"
+
+[sub_resource type="Animation" id="Animation_bu4jf"]
+resource_name = "MonkeyJump"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonkeyTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 0.17075512, 0.18946472, 0.25000006),
+"update": 0,
+"values": [Vector2(1181, 394), Vector2(737, 394), Vector2(587, 160), Vector2(743, 39)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MonkeyTexture:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1666666),
+"transitions": PackedFloat32Array(0.19614607, 1e-05),
+"update": 1,
+"values": [-3, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MonkeyTexture:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25574163, 0.4666667, 0.7224083, 0.86952156, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 0.3077861, 0.112656415, 0.120742165),
+"update": 0,
+"values": [394.0, 404.0, 394.0, 404.0, 394.0, 160.0, 39.0]
+}
+
+[sub_resource type="Animation" id="Animation_o7ddy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonkeyTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1181, 394)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MonkeyTexture:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MonkeyTexture:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [394.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0loja"]
+_data = {
+&"Monkey": SubResource("Animation_j2jfr"),
+&"MonkeyJump": SubResource("Animation_bu4jf"),
+&"RESET": SubResource("Animation_o7ddy")
 }
 
 [node name="main" type="Node2D" unique_id=432361688]
@@ -1181,6 +1273,33 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
+
+[node name="Monkey" type="Control" parent="Events" unique_id=2054358397]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("48_nvyfr")
+
+[node name="MonkeyAnim" type="AnimationPlayer" parent="Events/Monkey" unique_id=1420440762]
+libraries/ = SubResource("AnimationLibrary_0loja")
+
+[node name="MonkeyTexture" type="TextureRect" parent="Events/Monkey" unique_id=1107102448]
+z_index = 1
+layout_mode = 0
+offset_left = 1181.0
+offset_top = 394.0
+offset_right = 1308.0051
+offset_bottom = 520.00085
+texture = ExtResource("49_j2jfr")
+
+[node name="MonkeyFace" type="TextureRect" parent="Events/Monkey/MonkeyTexture" unique_id=1193812221]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 15.0
+offset_right = 67.0
+offset_bottom = 28.0
+texture = ExtResource("50_bjg73")
 
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false

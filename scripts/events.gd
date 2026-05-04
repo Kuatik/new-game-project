@@ -42,7 +42,7 @@ func _start_random_event():
 	print("current_event=", current_event.name)
 	current_event.event_finished.connect(_on_event_finished)
 	current_event.start_event()
-	if current_event and current_event.name == "Lights":
+	if current_event and (current_event.name == "Lights" or current_event.name == "Monkey"):
 		press.event_active = true
 	#pass
 
