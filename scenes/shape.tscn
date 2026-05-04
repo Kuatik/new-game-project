@@ -32,21 +32,8 @@ radius = 34.058773
 [sub_resource type="CircleShape2D" id="CircleShape2D_nodf0"]
 radius = 34.0147
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6bdw"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 1, 0, 0.6901961)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[node name="shape" type="RigidBody2D" unique_id=529246718 node_paths=PackedStringArray("outline")]
+[node name="shape" type="RigidBody2D" unique_id=529246718]
 script = ExtResource("1_2qewn")
-outline = NodePath("Outline")
 
 [node name="FireAnim" type="AnimatedSprite2D" parent="." unique_id=637530053]
 sprite_frames = SubResource("SpriteFrames_hxx72")
@@ -88,22 +75,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableArea" unique_id=45531630]
 shape = SubResource("CircleShape2D_nodf0")
-
-[node name="Outline" type="Panel" parent="." unique_id=230460443]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.5
-offset_top = -34.0
-offset_right = 34.5
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_p6bdw")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="input_event" from="DraggableArea" to="." method="_on_draggable_area_input_event"]

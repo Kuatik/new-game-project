@@ -16,7 +16,7 @@ signal shape_destroyed(shape_id: String)
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_anim: AnimatedSprite2D = $FireAnim
 
-@export var outline: Panel
+
 
 
 var dragging: bool = false
@@ -34,12 +34,12 @@ var color_map = {
 	"Purple": Color(0.5, 0, 1),
 	"Cyan": Color(0, 1, 1)
 }
-
+#
 func _ready():
 	disable_all_collisions()
 	fire_anim.visible = false
 	circle_collision.disabled = false
-	outline.hide()
+	#outline.hide()
 	var anim_name = shape_type.to_lower()
 	if animated_sprite.sprite_frames.has_animation(anim_name):
 		animated_sprite.animation = anim_name

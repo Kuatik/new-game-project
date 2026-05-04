@@ -18,6 +18,7 @@ extends Node2D
 
 const SHAPE_SCENE = preload("res://scenes/shape.tscn")
 const TICK_SCENE = preload("res://scenes/tick.tscn")
+const OUTLINE = preload("uid://m6u5b2ikg5tu")
 
 
 var all_combinations: Array[String] = [] # Все возможные комбинации спавна
@@ -121,7 +122,11 @@ func update_ui_sequence():
 		var icon = create_preview_icon(shape_name, color_name, is_current)
 		ui_sequence.add_child(icon)
 		if i < current_index:
-			icon.get_node("Container/Tick").visible = true
+			#icon.get_node("Container/Tick").visible = true
+			icon.get_node("Tick").visible = true
+		if i == current_index:
+			icon.get_node("Outline").visible = true
+			print("i == current_index")
 
 		
 #func mark_ui_sequence():
@@ -137,10 +142,14 @@ func create_preview_icon(shape: String, color: String, is_current: bool) -> Cont
 	var tick = TICK_SCENE.instantiate()
 	tick.visible = false
 	tick.name = "Tick"
+	var outline = OUTLINE.instantiate()
+	outline.visible = false
+	outline.name = "Outline"
 	# Контейнер для анимации
 	var container = CenterContainer.new()
 	container.name = "Container"
 	container.custom_minimum_size = Vector2(64, 64)
+	container.use_top_left = true
 	
 	# Создаём AnimatedSprite2D для показа формы
 	var anim_sprite = AnimatedSprite2D.new()
@@ -166,40 +175,43 @@ func create_preview_icon(shape: String, color: String, is_current: bool) -> Cont
 	
 	container.add_child(anim_sprite)
 	container.add_child(tick)
-	
-	var panel = Panel.new()
+	container.add_child(outline)
+	#if is_current:
+		#outline.visible = true
+	#var panel = Panel.new()
+	#var panel = outline
+	##panel.custom_minimum_size = Vector2(64, 64)
 	#panel.custom_minimum_size = Vector2(64, 64)
-	panel.custom_minimum_size = Vector2(64, 64)
-	panel.add_child(container)
-	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	#panel.anchor_bottom = 0.5
-	#panel.offset_bottom = 34.0
-	#panel.offset_top = 134.0
+	#panel.add_child(container)
+	#panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	##panel.anchor_bottom = 0.5
+	##panel.offset_bottom = 34.0
+	##panel.offset_top = 134.0
+	#
+	## Стиль для рамки (или её отсутствия)
+	#var style = StyleBoxFlat.new()
+	#if is_current:
+		#style.border_width_left = 3
+		#style.border_width_right = 3
+		#style.border_width_top = 3
+		#style.border_width_bottom = 3
+		#style.border_color = Color.YELLOW
+		#style.corner_radius_top_left = 8
+		#style.corner_radius_top_right = 8
+		#style.corner_radius_bottom_left = 8
+		#style.corner_radius_bottom_right = 8
+		#
+	#else:
+		## Невидимая рамка (толщина 0)
+		#style.border_width_left = 0
+		#style.border_width_right = 0
+		#style.border_width_top = 0
+		#style.border_width_bottom = 0
+	#style.bg_color = Color.TRANSPARENT
+	#panel.add_theme_stylebox_override("panel", style)
 	
-	# Стиль для рамки (или её отсутствия)
-	var style = StyleBoxFlat.new()
-	if is_current:
-		style.border_width_left = 3
-		style.border_width_right = 3
-		style.border_width_top = 3
-		style.border_width_bottom = 3
-		style.border_color = Color.YELLOW
-		style.corner_radius_top_left = 8
-		style.corner_radius_top_right = 8
-		style.corner_radius_bottom_left = 8
-		style.corner_radius_bottom_right = 8
-		
-	else:
-		# Невидимая рамка (толщина 0)
-		style.border_width_left = 0
-		style.border_width_right = 0
-		style.border_width_top = 0
-		style.border_width_bottom = 0
-	style.bg_color = Color.TRANSPARENT
-	panel.add_theme_stylebox_override("panel", style)
-	
-	#return container
-	return panel
+	return container
+	#return panel
 
 func create_temp_sprite_frames() -> SpriteFrames:
 	# Экстренный вариант – создаёт пустые анимации. Лучше так не делать, настройте preview_sprite_frames.

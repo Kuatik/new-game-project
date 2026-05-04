@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://2yvq6yiiep7y"]
+[gd_scene format=3 uid="uid://likwfdmbss2e"]
 
-[ext_resource type="Script" uid="uid://bwscw0y1ilbav" path="res://scripts/main_menu.gd" id="1_1a85y"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_1a85y"]
 [ext_resource type="Texture2D" uid="uid://by2x1g1rdup68" path="res://assets/bg/funny picture bg.png" id="2_hl5e0"]
 [ext_resource type="Texture2D" uid="uid://dd3nmgvpu3p55" path="res://assets/bg/funny picture bg 2.png" id="3_engjn"]
 [ext_resource type="Texture2D" uid="uid://crhmrc2bs717j" path="res://assets/bg/funny picture bg 1.png" id="4_6h3lr"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cpnkhreqirwi6" path="res://assets/allat_of_things/Znak.png" id="21_wadof"]
 [ext_resource type="Script" uid="uid://gpe2s2i40q8v" path="res://scripts/events/electricity_crash.gd" id="22_b4jiv"]
 [ext_resource type="Texture2D" uid="uid://b7el8acjpeh8x" path="res://assets/allat_of_things/Smoke.png" id="23_68b7m"]
+[ext_resource type="AudioStream" uid="uid://cvn1ka08p0tm1" path="res://assets/sound_effects/power_outage1.wav" id="24_6h3lr"]
 [ext_resource type="Shader" uid="uid://bkkw0bc24krjm" path="res://scenes/main.gdshader" id="24_vanrq"]
 [ext_resource type="Texture2D" uid="uid://p6wptg0cskrm" path="res://assets/allat_of_things/Lampochka.png" id="25_ybca7"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="26_k5xsf"]
@@ -629,8 +630,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("17_qw82i")
-min_delay = 5.0
-max_delay = 10.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1134938590 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -714,6 +713,9 @@ texture_over = ExtResource("18_6h3lr")
 texture_progress = ExtResource("17_engjn")
 tint_under = Color(0, 0, 0, 0.45490196)
 tint_progress = Color(0, 0.9989807, 0, 1)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=127453286]
+stream = ExtResource("24_6h3lr")
 
 [node name="ElectricityCrash" type="Control" parent="Events" unique_id=1969804793]
 layout_mode = 1
