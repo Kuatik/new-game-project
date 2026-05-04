@@ -7,6 +7,7 @@ extends Node2D
 @onready var audio: AudioStreamPlayer2D = $Audio
 
 @onready var lever_cooldown: Timer = $Lever/LeverCooldown
+@onready var destroy_sound: AudioStreamPlayer2D = $Area2D/DestroySound
 
 var event_active: bool = false
 
@@ -59,6 +60,7 @@ func _revert_lever():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is DraggableShape:
 		body.destroy()
+		destroy_sound.playing = true
 
 
 func _on_lever_cooldown_timeout() -> void:

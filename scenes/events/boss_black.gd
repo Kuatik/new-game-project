@@ -113,6 +113,10 @@ func _on_mouse_entered_shit(shit_node: Node):
 		mop.playing = false
 		if shits_to_clean <= 0:
 			stop_event()
+	#print("YOU ARE TOUCHIN THE SHIT")
+	
+
+func _play_sound():
 	print("YOU ARE TOUCHIN THE SHIT")
 	
 
@@ -134,6 +138,7 @@ func spawn_shit():
 			shit.texture = texture
 			shit.set_meta("hits", 0)
 			shit.mouse_entered.connect(_on_mouse_entered_shit.bind(shit))
+			#shit.get_node("Area2D").mouse_entered.connect(_play_sound)
 			point.add_child(shit)
 			shits.append(shit)
 			shits_to_clean += 1

@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://3asmsxi5pj7u" path="res://assets/bg/Press.png" id="13_trceg"]
 [ext_resource type="Texture2D" uid="uid://da84vvo5kklqd" path="res://assets/bg/Press lever.png" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bt424vykejhs" path="res://assets/bg/Press lever block.png" id="15_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://iv340uai6put" path="res://assets/sound_effects/universfield-glass-hit-192119.mp3" id="15_vchkt"]
 [ext_resource type="Texture2D" uid="uid://cwdo4k5n0cner" path="res://assets/bg/ProgressBar/progress-bar-circle.png" id="16_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://cln5545bnny3w" path="res://assets/bg/ProgressBar/progress-bar-frame.png" id="17_muem4"]
 [ext_resource type="Texture2D" uid="uid://ce4sop35fyth7" path="res://assets/bg/Press lever 2.png" id="19_0ld40"]
@@ -35,10 +36,12 @@
 [ext_resource type="Texture2D" uid="uid://c1tdcj0e4uf7j" path="res://assets/allat_of_things/Smoke 1.png" id="29_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://bw351il12g0k5" path="res://assets/allat_of_things/Znak3d.png" id="29_fv21b"]
 [ext_resource type="Material" uid="uid://bq6aicopp8pbh" path="res://assets/smoke_tres/new_particle_process_material.tres" id="29_j8jky"]
+[ext_resource type="AudioStream" uid="uid://br0yl42q1rpqr" path="res://assets/sound_effects/freesound_community-fuse-box-klick-106954.mp3" id="29_vc5cj"]
 [ext_resource type="PackedScene" uid="uid://d1pvvbvq0d2um" path="res://scenes/fix_machine.tscn" id="30_tel4y"]
 [ext_resource type="Material" uid="uid://b8j22b3yclcx6" path="res://assets/smoke_tres/2_smaller.tres" id="31_kmb1v"]
 [ext_resource type="Script" uid="uid://pvpeqou41vgj" path="res://scenes/events/boss_black.gd" id="37_fuf3a"]
 [ext_resource type="Texture2D" uid="uid://815caiyulxc1" path="res://assets/allat_of_things/Boss Black.png" id="38_5poiv"]
+[ext_resource type="AudioStream" uid="uid://cluhpik6nsst" path="res://assets/sound_effects/bip.mp3" id="38_txyw0"]
 [ext_resource type="Texture2D" uid="uid://bx2eiycspnivf" path="res://assets/allat_of_things/Boss Black 2.png" id="39_2cjbq"]
 [ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
@@ -732,6 +735,10 @@ input_pickable = false
 position = Vector2(-10.75, 2.5)
 shape = SubResource("RectangleShape2D_a8y0u")
 
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="Press/Area2D" unique_id=2072204799]
+stream = ExtResource("15_vchkt")
+volume_db = -6.753
+
 [node name="Lever" type="Node2D" parent="Press" unique_id=1738501484]
 position = Vector2(1089, 60)
 
@@ -847,7 +854,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
-Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -943,6 +949,9 @@ tint_progress = Color(0, 0.9989807, 0, 1)
 [node name="Audio" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=1363996439]
 stream = ExtResource("26_5q0nq")
 
+[node name="TurnOnSound" type="AudioStreamPlayer2D" parent="Events/Lights" unique_id=1415187056]
+stream = ExtResource("29_vc5cj")
+
 [node name="ElectricityCrash" type="Control" parent="Events" unique_id=1878803399]
 layout_mode = 1
 anchors_preset = 15
@@ -952,7 +961,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
-Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -1028,6 +1036,10 @@ visible = false
 z_index = 12
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="beeping" type="AudioStreamPlayer2D" parent="Events/ElectricityCrash" unique_id=520773785]
+stream = ExtResource("38_txyw0")
+parameters/looping = true
 
 [node name="BonusLives" type="Control" parent="Events" unique_id=2024648769 node_paths=PackedStringArray("main")]
 anchors_preset = 0
