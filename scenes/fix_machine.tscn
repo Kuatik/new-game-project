@@ -63,4 +63,24 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0.19076231, 0.19076234, 0.19076225, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/ColorRect" unique_id=948259918]
+z_index = 1
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 300.0
+mouse_filter = 2
+color = Color(0.34407586, 0.3440757, 0.34407574, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect/ColorRect" unique_id=342542689]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -310.0
+offset_bottom = 300.0
+grow_horizontal = 0
+mouse_filter = 2
 color = Color(0.34407586, 0.3440757, 0.34407574, 1)
