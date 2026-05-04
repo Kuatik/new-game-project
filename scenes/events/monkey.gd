@@ -24,6 +24,8 @@ const MONKEY_FACE_3 = preload("uid://dvhjxlnvc2l2i")
 const MONKEY_FACE_4 = preload("uid://cmcmwbepnw2gi")
 const MONKEY_FACE = preload("uid://c7817i72tvef")
 
+@onready var monkey_audio: AudioStreamPlayer2D = $monkey
+
 
 func _ready():
 	if not Enabled:
@@ -35,6 +37,7 @@ func _ready():
 	press_node.body_destroyed.connect(wow_face)
 
 func wow_face():
+	monkey_audio.play()
 	monkey_face.texture = MONKEY_FACE_3
 	await get_tree().create_timer(2).timeout
 	monkey_face.texture = MONKEY_FACE_4
@@ -46,6 +49,7 @@ func start_event():
 		return
 	# Показываем обезьянку (если она скрыта)
 	monkey_anim.play("monkey")
+	monkey_audio.play()
 	click_count = 0
 	required_clicks = randi_range(5, 10)
 	# Запускаем первый таймер

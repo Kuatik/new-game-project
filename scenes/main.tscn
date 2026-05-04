@@ -46,11 +46,11 @@
 [ext_resource type="Texture2D" uid="uid://dbq3cwbj6pawr" path="res://assets/allat_of_things/Boss Black 3.png" id="40_chjal"]
 [ext_resource type="Texture2D" uid="uid://0n6fh1bvww5h" path="res://assets/allat_of_things/Boss.png" id="41_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://crnv84yopkjur" path="res://assets/allat_of_things/Toilet room.png" id="42_2cjbq"]
-[ext_resource type="AudioStream" uid="uid://bhvyq63rt8hc3" path="res://assets/sound_effects/mop.mp3" id="44_cjqg0"]
+[ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
 [ext_resource type="Script" uid="uid://b6e2ldwq5oxac" path="res://scenes/events/monkey.gd" id="48_nvyfr"]
 [ext_resource type="Texture2D" uid="uid://bh2vommamgkbx" path="res://assets/allat_of_things/Bibizyanka 1.png" id="49_j2jfr"]
 [ext_resource type="Texture2D" uid="uid://b2sr307aytmas" path="res://assets/allat_of_things/Monkey Face 1.png" id="50_bjg73"]
-[ext_resource type="PackedScene" uid="uid://bbn2ubwn0okwk" path="res://scenes/fire_extinguisher.tscn" id="44_cjqg0"]
+[ext_resource type="AudioStream" uid="uid://cnn88ye6gdnek" path="res://assets/sound_effects/stu9-monkey-352770.mp3" id="50_bu4jf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
@@ -497,7 +497,7 @@ _data = {
 [node name="main" type="Node2D" unique_id=432361688]
 script = ExtResource("1_sugp2")
 lives = 100
-rand_fire_chance = 10.1
+rand_fire_chance = 100.0
 preview_sprite_frames = ExtResource("2_tefeu")
 
 [node name="background" type="Control" parent="." unique_id=533029335]
@@ -666,10 +666,11 @@ mouse_default_cursor_shape = 6
 theme_override_font_sizes/font_size = 46
 text = "Reset"
 
-[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main") instance=ExtResource("1_0wfyh")]
+[node name="Receiver" parent="." unique_id=640673187 node_paths=PackedStringArray("main", "light_bulb") instance=ExtResource("1_0wfyh")]
 position = Vector2(1295, 539)
 scale = Vector2(8.345, 8.345)
 main = NodePath("..")
+light_bulb = NodePath("../green_bulb")
 
 [node name="walls" type="Node" parent="." unique_id=584706517]
 
@@ -881,8 +882,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("20_gqmmt")
-min_delay = 1.0
-max_delay = 5.0
+min_delay = 20.0
+max_delay = 30.0
 
 [node name="Lights" type="Control" parent="Events" unique_id=1230435991 node_paths=PackedStringArray("spawn_timer")]
 layout_mode = 1
@@ -893,7 +894,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("21_yc10j")
-Enabled = false
 spawn_timer = NodePath("../../SpawnTimer")
 hold_duration = 1.0
 
@@ -1001,7 +1001,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_2wyq8")
-Enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Events/ElectricityCrash" unique_id=619549848]
 z_index = -2
@@ -1098,6 +1097,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("37_fuf3a")
+Enabled = true
 spawn_timer = NodePath("../../SpawnTimer")
 receiver_timer = NodePath("../../Receiver")
 conveyor = NodePath("../../conveyor")
@@ -1210,7 +1210,6 @@ position = Vector2(924, 533)
 position = Vector2(1111, 628)
 
 [node name="mop" type="AudioStreamPlayer2D" parent="Events/BossBlack/Shitter" unique_id=956162112]
-stream = ExtResource("44_cjqg0")
 
 [node name="DamageOverlay" type="ColorRect" parent="Events/BossBlack/Shitter" unique_id=1625562461]
 layout_mode = 1
@@ -1252,6 +1251,9 @@ anchor_bottom = 0.20634781
 grow_horizontal = 2
 texture = ExtResource("50_bjg73")
 metadata/_edit_use_anchors_ = true
+
+[node name="monkey" type="AudioStreamPlayer2D" parent="Events/Monkey" unique_id=407878846]
+stream = ExtResource("50_bu4jf")
 
 [node name="green_bulb" type="TextureRect" parent="." unique_id=199066953]
 visible = false
